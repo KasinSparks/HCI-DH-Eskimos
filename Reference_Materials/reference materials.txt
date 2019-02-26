@@ -1,0 +1,15 @@
+---------------------- Flask and Python --------------------------------
+* https://www.youtube.com/watch?v=pP23CtOI-1U
+* https://www.youtube.com/watch?v=j5wysXqaIV8
+* https://www.youtube.com/watch?v=zzDUnnj2p8I
+
+---------------------------- SQL ---------------------------------------
+* https://www.youtube.com/watch?v=gu980iXwY5c
+* https://www.youtube.com/watch?v=LxDetsPQAPQ
+
+------------------------ Javascript ------------------------------------
+* https://www.youtube.com/watch?v=dlEPkLSDQi0
+* https://www.youtube.com/watch?v=XNDZ3eg_VcE
+
+--------------- HTML Image Capture and Upload --------------------------
+* https://developers.google.com/web/fundamentals/media/capturing-images/
