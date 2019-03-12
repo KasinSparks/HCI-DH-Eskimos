@@ -54,6 +54,7 @@ def result():
 	filename = secure_filename(img.filename)
 	##savePath = os.getcwd() + app.config['UPLOAD_FOLDER'] + '\\'
 	img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+	
 
 	# test
 	db = getDB()
