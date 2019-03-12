@@ -9,6 +9,7 @@ The repository for Team 5
 3. Double click on FlaskWebProject.sln to open in Visual Studios
 4. Download and install any missing packages
 5. Click on Web Server (debug button) inside of Visual Studios to run on your computer (localhost)
+5.1 change debug type. (Debug -> FlaskWebProject Properties -> Debug -> Launch mode -> Standard Python launcher
 
 ## Please refer to the Reference Materials in the Reference_Materials folder for help with flask, python, sql, etc.
 
