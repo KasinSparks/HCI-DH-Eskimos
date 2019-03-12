@@ -1,0 +1,11 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+	<h1>{{ pageName }}</h1>
+	<p>a test</p>
+	<button class="button">click me</button>
+
+	<form action="http://localhost:5555/"  method="POST">
+		<p><input type="submit" value="submit" /></p>
+	</form>
+{% endblock content %}

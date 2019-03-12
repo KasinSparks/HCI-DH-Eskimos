@@ -1,0 +1,16 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+	<h1>{{ pageName }}</h1>
+	<p>a test for img</p>
+
+	<img src="#", id="imagePrev" />
+
+	<form enctype=multipart/form-data action="http://localhost:5555/result"  method="POST">
+		<input type="file" accept="image/*" name="test" id="test" onchange="document.getElementById('imagePrev').src = window.URL.createObjectURL(this.files[0])">
+		<input type="submit">
+		<!--<input type="submit" value="Submit">-->
+	</form>
+
+	<img src="data:image/png;base64, {{ img }}"/>
+{% endblock content %}
