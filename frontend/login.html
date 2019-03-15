@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Oklahoma Department of Human Services</title>
+
+        <!--viewport metas go here-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="base.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    	<header class="banner">
+    		<img class="logo" src="" alt="DHS logo">
+    		<a class="web_title" href="index.html">OKDHS Adult and Family Services Information Center</a>
+    	</header>
+
+    	<article>
+    		<section class="isClient">
+    			<h1>DHS Client Sign In</h1>
+    			<form>
+    				<label for="uname">User Name</label>
+    				<input type="text" name="uname" placeholder="Enter your email" required><br>
+
+    				<label for="psw">Password</label>
+    				<input type="text" name="psw" placeholder="Enter your password" required><br>
+
+    				<button type="submit">Login</button><br>
+    				<button type="button">Make An Account</button><br>
+
+    				<a href="">Forgot your password?</a>
+    			</form>
+    		</section>
+
+    		<section class="isntClient">
+    			<button id="modalButton">Not a DHS Client?</button><!--need script to work properly-->
+    			<!--The Modal-->
+    			<div id="helpModal" class="modContent">
+    				<span class="close">&times;</span><!--This is the "x" close"-->
+    				<h1>What is a client?</h1>
+    				<p>A client is an individual or family recieving benefits from the Department of Human Services (DHS). If you aren't currently receiving benefits from a DHS program you can still use this application to learn about the Adult and Family Services (AFS) department and programs.</p>
+    			</div> 
+
+    			<a href="help2.html">Learn More</a>
+    		</section>
+    	</article>
+    </body>
+</html>
