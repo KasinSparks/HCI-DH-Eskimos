@@ -1,28 +1,31 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
+    <body>
+        <p>This is a test for the calendar</p>
+        <p>more testing {{ numRows }}</p>
 
-<p>This is a test for the calendar</p>
-<p>more testing {{ numRows }}</p>
+        <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thur</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
 
-<table>
-    <tr>
-        <th>Sun</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thur</th>
-        <th>Fri</th>
-        <th>Sat</th>
-    </tr>
-
-    {% for row in calData %}
-        <tr>
-            {% for data in row %}
-                {% if data != 0 %}
-                    <td>{{ data }}</td>
-                {% else %}
-                    <td>  </td>
-                {% endif %}
+            {% for row in calData %}
+                <tr>
+                    {% for data in row %}
+                        {% if data != 0 %}
+                            <td>{{ data }}</td>
+                        {% else %}
+                            <td>  </td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
             {% endfor %}
-        </tr>
-    {% endfor %}
-</table>
+        </table>
+    </body>
+</html>
