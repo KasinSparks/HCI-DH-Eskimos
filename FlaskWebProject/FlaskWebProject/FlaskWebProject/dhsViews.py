@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash, generate_password_hash
 from FlaskWebProject import app
 from FlaskWebProject.db import getDB
+from FlaskWebProject import calendar_module
 
 #test = Enviroment(app)
 
@@ -43,7 +44,15 @@ def imgGet(image):
 
 @app.route("/test")
 def test():
-	return render_template('test.html', pageName='PROJECT TEST PAGE', img=imgGet('NoImageIcon.png'))
+	"""testing"""
+	
+	return render_template('test.html', 
+						title='this is a test', 
+						pageName='PROJECT TEST PAGE', 
+						img=imgGet('NoImageIcon.png'), 
+						numRows=6,
+						calData=calendar_module.generateCal(3,2019)
+						)
 
 @app.route("/result", methods=['GET', 'POST'])
 def result():

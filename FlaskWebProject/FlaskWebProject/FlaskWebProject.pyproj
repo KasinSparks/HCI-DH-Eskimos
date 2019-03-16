@@ -32,6 +32,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FlaskWebProject\calendar_module.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FlaskWebProject\db.py">
       <SubType>Code</SubType>
     </Compile>
@@ -59,6 +62,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="FlaskWebProject\static\img\NoImageIcon.png" />
+    <Content Include="FlaskWebProject\templates\calendar.html" />
     <Content Include="FlaskWebProject\templates\home.html" />
     <Content Include="FlaskWebProject\templates\imgTest.html" />
     <Content Include="FlaskWebProject\templates\test.html" />
