@@ -5,12 +5,14 @@ Routes and views for the dhs side of the flask application.
 import os
 import base64
 from datetime import datetime
-from flask import Flask, render_template, request, url_for, send_from_directory, redirect
+from flask import Flask, render_template, request, url_for, send_from_directory, redirect, session
 from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash, generate_password_hash
 from FlaskWebProject import app
-from FlaskWebProject.db import getDB
+from . import db
 from FlaskWebProject import calendar_module
+
+
 
 #test = Enviroment(app)
 
@@ -46,13 +48,20 @@ def imgGet(image):
 def test():
 	"""testing"""
 	
+	## TODO: check the input so XSS or sql injections can not happen
+	month = request.args.get('month', default=datetime.today().month, type=int)
+	print('month passed: ', month)
+	year = request.args.get('year', default=datetime.today().year, type=int)
+	print('year passed: ', year)
+
 	return render_template('test.html', 
 						title='this is a test', 
 						pageName='PROJECT TEST PAGE', 
 						img=imgGet('NoImageIcon.png'), 
 						numRows=6,
-						calData=calendar_module.generateCal(3,2019)
+						calData=calendar_module.generateCal(month,year)
 						)
+
 
 @app.route("/result", methods=['GET', 'POST'])
 def result():
@@ -71,3 +80,42 @@ def result():
 	db.commit()
 
 	return render_template('imgTest.html', pageName="Image received", img=imgGet(filename))
+
+@app.route("/login")
+def loginPage():
+	return render_template(
+		'login.html',
+		title = 'TEST LOGIN',
+		pageName = 'A test login page',
+		)
+
+@app.route("/login/submit", methods=['POST'])
+def login():
+	
+	# temp. store the data the user entered in
+	userName = request.form.get("username")
+	password = request.form.get("password")
+
+	# query string
+	queryStr = 'SELECT User_Name FROM Users WHERE User_Name = ? AND Password = ?'
+
+	# perform a query, results come back in a list of values
+	user = db.query_db(queryStr, (userName, password), one=True)
+
+	# make sure the data entered is valid
+	if user is None:
+		print('No user found')
+		user = 'no user found'
+	else:
+		print(user)
+		print(user['User_Name'])
+		user = user['User_Name']
+
+	
+
+	return render_template(
+		'loginSuccessTest.html',
+		title = 'TEST LOGIN',
+		pageName = 'A test login page',
+		status = user
+		)

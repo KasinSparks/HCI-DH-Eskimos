@@ -23,6 +23,15 @@ def closeDB(e=None):
 	if db is not None:
 		db.close()
 
+# from http://flask.pocoo.org/docs/1.0/patterns/sqlite3/
+def query_db(query, args=(), one=False):
+	cur = getDB().execute(query, args)
+	rv = cur.fetchall()
+	cur.close()
+
+	# close database connection
+	closeDB()
+	return (rv[0] if rv else None) if one else rv
 
 def initDB():
 	db = getDB()

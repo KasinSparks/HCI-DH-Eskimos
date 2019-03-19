@@ -48,7 +48,6 @@
   <ItemGroup>
     <Folder Include="FlaskWebProject\" />
     <Folder Include="FlaskWebProject\database\" />
-    <Folder Include="FlaskWebProject\database\tables\" />
     <Folder Include="FlaskWebProject\Images\" />
     <Folder Include="FlaskWebProject\static\" />
     <Folder Include="FlaskWebProject\static\content\" />
@@ -58,13 +57,14 @@
     <Folder Include="FlaskWebProject\templates\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FlaskWebProject\database\schema.sql">
-      <SubType>Code</SubType>
-    </Content>
+    <Content Include="FlaskWebProject\database\db.sqlite" />
+    <Content Include="FlaskWebProject\database\DB_Relations.jpg" />
     <Content Include="FlaskWebProject\static\img\NoImageIcon.png" />
     <Content Include="FlaskWebProject\templates\calendar.html" />
     <Content Include="FlaskWebProject\templates\home.html" />
     <Content Include="FlaskWebProject\templates\imgTest.html" />
+    <Content Include="FlaskWebProject\templates\loginSuccessTest.html" />
+    <Content Include="FlaskWebProject\templates\login.html" />
     <Content Include="FlaskWebProject\templates\test.html" />
     <Content Include="requirements.txt" />
     <Content Include="FlaskWebProject\static\content\bootstrap.css" />
