@@ -32,6 +32,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FlaskWebProject\auth.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FlaskWebProject\calendar_module.py">
       <SubType>Code</SubType>
     </Compile>
