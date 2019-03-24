@@ -41,12 +41,11 @@
     <Compile Include="FlaskWebProject\db.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FlaskWebProject\dhsViews.py">
+    <Compile Include="app.py" />
+    <Compile Include="FlaskWebProject\userViews.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="app.py" />
     <Compile Include="FlaskWebProject\__init__.py" />
-    <Compile Include="FlaskWebProject\views.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FlaskWebProject\" />
@@ -58,6 +57,8 @@
     <Folder Include="FlaskWebProject\static\img\" />
     <Folder Include="FlaskWebProject\static\scripts\" />
     <Folder Include="FlaskWebProject\templates\" />
+    <Folder Include="FlaskWebProject\templates\auth\" />
+    <Folder Include="FlaskWebProject\templates\userViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FlaskWebProject\database\db.sqlite" />
@@ -67,8 +68,9 @@
     <Content Include="FlaskWebProject\templates\home.html" />
     <Content Include="FlaskWebProject\templates\imgTest.html" />
     <Content Include="FlaskWebProject\templates\loginSuccessTest.html" />
-    <Content Include="FlaskWebProject\templates\login.html" />
+    <Content Include="FlaskWebProject\templates\auth\login.html" />
     <Content Include="FlaskWebProject\templates\test.html" />
+    <Content Include="FlaskWebProject\templates\userViews\index.html" />
     <Content Include="requirements.txt" />
     <Content Include="FlaskWebProject\static\content\bootstrap.css" />
     <Content Include="FlaskWebProject\static\content\bootstrap.min.css" />
