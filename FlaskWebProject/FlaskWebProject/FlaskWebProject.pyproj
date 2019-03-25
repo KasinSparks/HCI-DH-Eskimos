@@ -42,6 +42,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="app.py" />
+    <Compile Include="FlaskWebProject\adminViews.py" />
+    <Compile Include="FlaskWebProject\ImageRender.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FlaskWebProject\userViews.py">
       <SubType>Code</SubType>
     </Compile>
@@ -58,19 +62,25 @@
     <Folder Include="FlaskWebProject\static\scripts\" />
     <Folder Include="FlaskWebProject\templates\" />
     <Folder Include="FlaskWebProject\templates\auth\" />
+    <Folder Include="FlaskWebProject\templates\adminViews\" />
     <Folder Include="FlaskWebProject\templates\userViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FlaskWebProject\database\db.sqlite" />
     <Content Include="FlaskWebProject\database\DB_Relations.jpg" />
     <Content Include="FlaskWebProject\static\img\NoImageIcon.png" />
-    <Content Include="FlaskWebProject\templates\calendar.html" />
+    <Content Include="FlaskWebProject\templates\adminViews\create_user.html" />
+    <Content Include="FlaskWebProject\templates\userViews\calendar.html" />
     <Content Include="FlaskWebProject\templates\home.html" />
     <Content Include="FlaskWebProject\templates\imgTest.html" />
     <Content Include="FlaskWebProject\templates\loginSuccessTest.html" />
     <Content Include="FlaskWebProject\templates\auth\login.html" />
     <Content Include="FlaskWebProject\templates\test.html" />
     <Content Include="FlaskWebProject\templates\userViews\index.html" />
+    <Content Include="FlaskWebProject\templates\userViews\profile.html" />
+    <Content Include="FlaskWebProject\templates\userViews\imageViewer.html" />
+    <Content Include="FlaskWebProject\templates\userViews\uploadDocument.html" />
+    <Content Include="FlaskWebProject\templates\userViews\uploads.html" />
     <Content Include="requirements.txt" />
     <Content Include="FlaskWebProject\static\content\bootstrap.css" />
     <Content Include="FlaskWebProject\static\content\bootstrap.min.css" />

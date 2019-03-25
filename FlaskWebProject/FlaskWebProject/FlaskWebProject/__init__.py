@@ -17,14 +17,18 @@ def create_app(test_config=None):
 	import FlaskWebProject.db
 	db.init_app(app)
 
+	## auth blueprint
 	from . import auth
 	app.register_blueprint(auth.bp)
 	app.add_url_rule('/', endpoint='userViews.index')
 	
+	## user views blueprint
 	from . import userViews
 	app.register_blueprint(userViews.bp)
 	
-
+	## admin views blueprint
+	from . import adminViews
+	app.register_blueprint(adminViews.bp)
 	
 
 	##import FlaskWebProject.views

@@ -1,0 +1,32 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+	<table>
+		<!--Table Headers-->
+		<tr>
+			<th>Name</th>
+			<th>Date Uploaded</th>
+			<th>Type</th>
+			<th>View</th>
+		</tr>
+
+		<!--Table Data-->
+
+		{% for upload in uploads %}
+			<tr>
+				<td>{{ upload.Doc_Name|e }}</td>
+				<td>{{ upload.Date_Uploaded|e }}</td>
+				<td>{{ upload.Document_Type }}</td>
+				<td>
+					<form action="/uploads/render" method="post" target="_blank">
+						<!-- TODO: hash the client UID and file name maybe -->
+						<input name="fileName" type="text" value="{{ upload.File_Name }}" hidden/>
+						<input type="submit" name="renderImage" value="Open" />
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	<a href="/uploads/upload_document">Upload a new document</a>
+{% endblock content %}

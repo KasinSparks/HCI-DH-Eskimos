@@ -1,0 +1,42 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+	<form action="/add/user" method="post">
+		<label for="UID">UID:</label>
+		<input type="text" name="uid" />
+		<br />
+		<label for="user_name">User Name:</label>
+		<input type="text" name="user_name" />
+		<br />
+		<label for="password">Password:</label>
+		<input type="password" name="password" />
+		<br />
+		<label for="user_type">user_type:</label>
+		<select name="user_type">
+			<option value="client">Client</option>
+			<option value="social_worker">Social Worker</option>
+		</select>
+	</form>
+
+	<!-- add client -->
+	<form action="/add/client" method="post">
+		<label for="uid">UID:</label>
+		<input type="text" name="uid" disabled value="{{ uid }}" />
+		<br />
+		<label for="first_name">First Name:</label>
+		<input type="text" name="first_name" />
+		<br />
+		<label for="last_name">Last Name:</label>
+		<input type="text" name="last_name" />
+		<br />
+		<label for="dob">Date of Birth:</label>
+		<input type="date" name="dob" />
+		<br />
+		<label for="address">Address:</label>
+		<input type="text" name="address" />
+		<br />
+		<label for="case_status">Case Status:</label>
+		<input type="number" name="case_status" />
+		<br />
+	</form>
+{% endblock content %}

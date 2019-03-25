@@ -1,7 +1,7 @@
 from datetime import datetime
 
 # returns a 2D list of the day number in the proper slot of calendar
-def generateCal(month, year):
+def generateCal(month = datetime.now().month, year = datetime.today().year):
 	## Debugging statements
 	#currDate = datetime.today()
 	#print(currDate)
@@ -51,3 +51,22 @@ def remapWeekDay(i):
 		return 0
 	else:
 		return i + 1
+
+# return the name of a month
+def nameOfMonth(monthNum):
+	switch = {
+		1: "January",
+        2: "February",
+        3: "March",
+        4: "April",
+        5: "May",
+        6: "June",
+        7: "July",
+        8: "August",
+        9: "September",
+        10: "October",
+        11: "November",
+        12: "December"
+    }
+	
+	return switch.get(monthNum, 'invaild month number')

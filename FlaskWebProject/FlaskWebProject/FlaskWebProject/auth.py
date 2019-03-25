@@ -81,7 +81,7 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
 	session.clear()
-	return redirect(url_for('index'))
+	return redirect(url_for('userViews.index'))
 
 
 ## require a user to be logged in to access a view
