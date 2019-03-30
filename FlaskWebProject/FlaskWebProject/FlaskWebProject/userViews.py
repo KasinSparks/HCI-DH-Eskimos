@@ -21,7 +21,7 @@ def index():
 	return render_template(
 		'auth/login.html',
 		title='Login Page',
-		year=datetime.now().year,
+		year=datetime.now().year
 	)
 
 ## TODO: have it so there is another render template if user is not logged in

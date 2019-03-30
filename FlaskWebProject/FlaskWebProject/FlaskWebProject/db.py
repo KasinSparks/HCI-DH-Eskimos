@@ -10,8 +10,7 @@ from flask.cli import with_appcontext
 # returns the current data base
 def getDB():
 	if 'db' not in g:
-		g.db = sqlite3.connect(current_app.config['DATABASE'], 
-								detect_types = sqlite3.PARSE_DECLTYPES)
+		g.db = sqlite3.connect(current_app.config['DATABASE'], detect_types = sqlite3.PARSE_DECLTYPES)
 		g.db.row_factory = sqlite3.Row
 
 	return g.db
