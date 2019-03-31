@@ -31,43 +31,65 @@ def profile():
 
 	## debug.... DELETE ME
 	#print(g.user['User_Name'])
+	if g.user['Client'] == 1:
+		## query string for the connected cases
+		queryStr = 'SELECT UID_Connected_Person FROM Connected_Person WHERE UID_Client=?'
+		## result form connected cases query
+		connected_cases_list = query_db(queryStr, (g.user['UID_Users'],))
 
-	## query string for the connected cases
-	queryStr = 'SELECT UID_Connected_Person FROM Connected_Person WHERE UID_Client=?'
-	## result form connected cases query
-	connected_cases_list = query_db(queryStr, (g.user['UID_Users'],))
+		## debug.... DELETE ME
+		#for clients in connected_cases_list:
+		#	print(clients)
 
-	## debug.... DELETE ME
-	#for clients in connected_cases_list:
-	#	print(clients)
+		## get the client data from the previous query
+		connected_client_list = []
+		queryStr = 'SELECT * FROM Client WHERE UID_Client=?'
+		for clients in connected_cases_list:
+			connected_client_list.append(query_db(queryStr, (clients['UID_Connected_Person'],), True))
 
-	## get the client data from the previous query
-	connected_client_list = []
-	queryStr = 'SELECT * FROM Client WHERE UID_Client=?'
-	for clients in connected_cases_list:
-		connected_client_list.append(query_db(queryStr, (clients['UID_Connected_Person'],), True))
+		## get the current user's data to display at the top of accordion
+		queryStr = 'SELECT * FROM Client WHERE UID_Client=?'
+		currUser = query_db(queryStr, (g.user['UID_Users'],), True)
 
-	## get the current user's data to display at the top of accordion
-	queryStr = 'SELECT * FROM Client WHERE UID_Client=?'
-	currUser = query_db(queryStr, (g.user['UID_Users'],), True)
+		## debug.... DELETE ME
+		#print(g.user['UID_Users'])
+		#print(currUser['Social_Worker_UID'])
 
-	## get the current user's social worker data
-	queryStr = 'SELECT * FROM Social_Worker WHERE UID_Social_Worker=?'
-	socialWorker = query_db(queryStr, (currUser['Social_Worker_UID'],), True)
+		## get the current user's social worker data
+		queryStr = 'SELECT * FROM Social_Worker WHERE UID_Social_Worker=?'
+		socialWorker = query_db(queryStr, (currUser['Social_Worker_UID'],), True)
 
-	## get the current user's current county office
-	queryStr = 'SELECT * FROM County_Office WHERE UID_County_Office=?'
-	countyOffice = query_db(queryStr, (currUser['County_Office_UID'],), True)
+		## get the current user's current county office
+		queryStr = 'SELECT * FROM County_Office WHERE UID_County_Office=?'
+		countyOffice = query_db(queryStr, (currUser['County_Office_UID'],), True)
 
-	return render_template(
-		'userViews/profile.html',
-		title='Profile Page',
-		worker=socialWorker,
-		clientData=currUser,
-		connectedCases=connected_client_list,
-		countyOffice=countyOffice,
-		year=datetime.now().year
-		)
+		return render_template(
+			'userViews/profile.html',
+			title='Profile Page',
+			worker=socialWorker,
+			clientData=currUser,
+			connectedCases=connected_client_list,
+			countyOffice=countyOffice,
+			year=datetime.now().year
+			)
+	elif g.user['social_Worker'] == 1:
+
+		## get the current user's social worker data
+		queryStr = 'SELECT * FROM Social_Worker WHERE UID_Social_Worker=?'
+		socialWorker = query_db(queryStr, (g.user['UID_Users'],), True)
+
+		## get the current user's current county office
+		queryStr = 'SELECT * FROM County_Office WHERE UID_County_Office=?'
+		countyOffice = query_db(queryStr, (socialWorker['County_Office_UID'],), True)
+
+		return render_template(
+			'socialWorkerViews/sw_profile.html',
+			title='Profile Page',
+			worker=socialWorker,
+			countyOffice=countyOffice,
+			year=datetime.now().year
+			)
+
 
 
 @bp.route('/uploads')
@@ -215,8 +237,13 @@ def calendar():
 		py = y
 
 	## select the events that occur in the month displayed
-	queryStr = 'SELECT * FROM Calendar WHERE Event_Date_Month=? AND Event_Date_Year=?;'
-	queryResult = query_db(queryStr, (m, y))
+	queryStr = 'SELECT * FROM Calendar WHERE Event_Date_Month=? AND Event_Date_Year=? AND (User_UID=? OR User_UID=?);'
+	
+	## determines what data to display. -1 for public data and uuid for private data
+	if g.user is None:
+		queryResult = query_db(queryStr, (m, y, -1, -1))
+	else:
+		queryResult = query_db(queryStr, (m, y, g.user['UID_Users'], -1))
 
 	return render_template(
 		'userViews/calendar.html',
@@ -232,3 +259,91 @@ def calendar():
 		prevYear=py,
 		deadlines=queryResult
 		)
+
+
+
+### TODO: move this into a new python file for sw_views
+@bp.route('/notifications')
+@login_required
+def notifications():
+	if g.user['social_worker'] == 1:
+		## get the current social worker's notifictations
+		notifQry = 'SELECT * FROM Notifications WHERE UID_Social_Worker=? ORDER BY Has_Been_Read ASC;'
+		queryResult = query_db(notifQry, (int(g.user['UID_Users']),))
+
+		return render_template(
+			'socialWorkerViews/notifications.html',
+			notifications=queryResult,
+			year=datetime.now().year,
+			title='Notifications'
+			)
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
+### TODO: move this into a new python file for sw_views
+@bp.route('/notifications/open', methods=('GET', 'POST'))
+@login_required
+def notifications_open():
+	if g.user['social_worker'] == 1:
+
+		uid_Notification = request.args.get('n')
+
+		## set the current notification to has been read to true
+		from FlaskWebProject.db import getDB
+		db = getDB()
+		curr = db.execute('UPDATE Notifications SET Has_Been_Read=? WHERE UID_Notification=?', (1, int(uid_Notification)))
+		db.commit()
+		curr.close()
+
+		## get the current social worker's notifictations
+		notifQry = 'SELECT * FROM Notifications WHERE UID_Notification=?'
+		notifQueryResult = query_db(notifQry, (int(uid_Notification),), True)
+
+		## get the client data from the notification
+		clientQry = 'SELECT * FROM Client WHERE UID_Client=?'
+		clientQueryResult = query_db(clientQry, (int(notifQueryResult['UID_Client']),), True)
+
+		## get the user status
+		userQry = 'SELECT Is_Verified FROM Users WHERE UID_Users=?'
+		userQueryResult = query_db(userQry, (int(clientQueryResult['UID_Client']),), True)
+
+		return render_template(
+			'socialWorkerViews/notificationsOpen.html',
+			notification=notifQueryResult,
+			clientData=clientQueryResult,
+			verified=userQueryResult,
+			year=datetime.now().year,
+			title='Notifications Viewer'
+			)
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+@bp.route('/account/confirm', methods=('GET', 'POST'))
+@login_required
+def confirm_account():
+	## get the uid for the user to confirm
+	uid = int(request.args['u'])
+	fn = request.args['fn']
+	ln = request.args['ln']
+	dob = request.args['dob']
+	cs = request.args['case_status']
+	cn = request.args['case_num']
+	of = request.args['office']
+	ad = request.args['address']
+
+
+	## make the change to the database
+	from FlaskWebProject.db import getDB
+	cur = getDB().execute('UPDATE Users SET Is_Verified=? WHERE UID_Users=?;', (1, uid))
+	getDB().commit()
+	cur.close()
+
+	cur = getDB().execute('UPDATE Client SET First_Name=?, Last_Name=?, DOB=?, Address=?,' +
+		'Case_Status=?, Case_Number=?, County_Office_UID=? WHERE UID_Client=?;', (fn, ln, dob, ad, cs, cn, of, uid))
+	getDB().commit()
+	cur.close()
+
+	return redirect(url_for('userViews.notifications'))

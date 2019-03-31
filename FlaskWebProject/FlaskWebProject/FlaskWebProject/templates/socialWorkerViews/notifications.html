@@ -1,0 +1,21 @@
+﻿{% extends 'layout.html' %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>UID Client</th>
+            <th>Notification Type</th>
+            <th>Has Been Read</th>
+        </tr>
+        {% for n in notifications %}
+            <tr>
+                <td>{{ n.UID_Client }}</td>
+                <td>{{ n.Notification_Type }}</td>
+                <td>{{ n.Has_Been_Read }}</td>
+                <td>
+                    <button onclick="window.location += '/open?n=' + {{ n.UID_Notification }}">Open</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

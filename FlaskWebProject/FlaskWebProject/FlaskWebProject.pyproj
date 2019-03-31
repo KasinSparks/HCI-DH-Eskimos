@@ -63,6 +63,7 @@
     <Folder Include="FlaskWebProject\templates\" />
     <Folder Include="FlaskWebProject\templates\auth\" />
     <Folder Include="FlaskWebProject\templates\adminViews\" />
+    <Folder Include="FlaskWebProject\templates\socialWorkerViews\" />
     <Folder Include="FlaskWebProject\templates\userViews\" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,10 @@
     <Content Include="FlaskWebProject\database\DB_Relations.jpg" />
     <Content Include="FlaskWebProject\static\img\NoImageIcon.png" />
     <Content Include="FlaskWebProject\templates\adminViews\create_user.html" />
+    <Content Include="FlaskWebProject\templates\auth\createProfile.html" />
+    <Content Include="FlaskWebProject\templates\socialWorkerViews\notificationsOpen.html" />
+    <Content Include="FlaskWebProject\templates\socialWorkerViews\notifications.html" />
+    <Content Include="FlaskWebProject\templates\socialWorkerViews\sw_profile.html" />
     <Content Include="FlaskWebProject\templates\userViews\calendar.html" />
     <Content Include="FlaskWebProject\templates\home.html" />
     <Content Include="FlaskWebProject\templates\imgTest.html" />

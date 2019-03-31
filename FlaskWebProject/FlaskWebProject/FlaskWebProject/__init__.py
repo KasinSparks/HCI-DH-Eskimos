@@ -8,12 +8,12 @@ from flask import Flask
 def create_app(test_config=None):
 	app = Flask(__name__, instance_relative_config=True)
 
-        if os.getcwd() == '/':
-            database_path = '/var/www/HCI-DH-Eskimos/FlaskWebProject/FlaskWebProject/FlaskWebProject/database'
-            upload_path = '/var/www/HCI-DH-Eskimos/FlaskWebProject/FlaskWebProject/FlaskWebProject/Images'
-        else:
-            database_path = os.path.join('FlaskWebProject', 'database')
-            upload_path = os.path.join('FlaskWebProject', 'Images')
+	if os.getcwd() == '/':
+		database_path = '/var/www/HCI-DH-Eskimos/FlaskWebProject/FlaskWebProject/FlaskWebProject/database'
+		upload_path = '/var/www/HCI-DH-Eskimos/FlaskWebProject/FlaskWebProject/FlaskWebProject/Images'
+	else:
+		database_path = os.path.join(os.getcwd(), 'FlaskWebProject', 'database')
+		upload_path = os.path.join(os.getcwd(), 'FlaskWebProject', 'Images')
 
 	app.config.from_mapping(
 		SECRET_KEY='changethiskeylater',
