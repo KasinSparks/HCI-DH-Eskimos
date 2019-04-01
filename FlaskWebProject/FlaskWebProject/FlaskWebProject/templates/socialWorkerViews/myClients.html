@@ -1,0 +1,30 @@
+﻿{% extends 'layout.html' %}
+
+{% block content %}
+
+    <table style="border-collapse: collapse;">
+        <tr>
+            <th>Name</th>
+            <th>Case Number</th>
+            <th>Case Type</th>
+            <th>Case Status</th>
+            <th>View Case</th>
+        </tr>
+
+        {% for c in clients %}
+        <tr>
+            <td style="border:1px solid black">{{ c.Last_Name }}, {{ c.First_Name }}</td>
+            <td style="border:1px solid black">{{ c.Case_Number }}</td>
+            <td style="border:1px solid black">{{ c.Case_Type }}</td>
+            <td style="border:1px solid black">{{ c.Case_Status }}</td>
+            <td style="border:1px solid black">
+                <form action="{{ url_for('userViews.client_info') }}" method="post">
+                    <input hidden name="uid" value="{{ c.UID_Client }}" />
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}

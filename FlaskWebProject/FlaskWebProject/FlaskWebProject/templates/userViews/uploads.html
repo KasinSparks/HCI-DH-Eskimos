@@ -18,11 +18,12 @@
 				<td>{{ upload.Date_Uploaded|e }}</td>
 				<td>{{ upload.Document_Type }}</td>
 				<td>
-					<form action="/uploads/render" method="post" target="_blank">
-						<!-- TODO: hash the client UID and file name maybe -->
-						<input name="fileName" type="text" value="{{ upload.File_Name }}" hidden/>
-						<input type="submit" name="renderImage" value="Open" />
-					</form>
+                    <form action="/uploads/render" method="post" target="_blank">
+                        <!-- TODO: hash the client UID and file name maybe -->
+                        <input name="fileName" type="text" value="{{ upload.File_Name }}" hidden />
+                        <input name="cid" type="number" value="{{ upload.Client_UID }}" hidden />
+                        <input type="submit" name="renderImage" value="Open" />
+                    </form>
 				</td>
 			</tr>
 		{% endfor %}

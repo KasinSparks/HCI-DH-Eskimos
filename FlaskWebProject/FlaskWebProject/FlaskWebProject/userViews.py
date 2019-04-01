@@ -7,6 +7,7 @@ from werkzeug.exceptions import abort
 
 from FlaskWebProject.auth import login_required
 from FlaskWebProject.db import query_db
+from . import db
 
 from FlaskWebProject.ImageRender import imgGet
 
@@ -115,7 +116,14 @@ def render():
 	## get the data from the form submited
 
 	## we can use g.user to get the user's username and save location
-	saveLoc = g.user['User_Name']
+	if request.method == 'POST':
+		cid = request.form['cid']
+
+		qryStr = 'SELECT User_Name FROM Users WHERE UID_Users=?'
+		clientEmail = query_db(qryStr, (cid,), True)
+
+		saveLoc = clientEmail['User_Name']
+
 	fileName = request.form['fileName']
 
 	## generate the path for the image location
@@ -321,29 +329,257 @@ def notifications_open():
 		## current person logged in is not a social worker
 		redirect(url_for('auth.login'))
 
+
+
 @bp.route('/account/confirm', methods=('GET', 'POST'))
 @login_required
 def confirm_account():
-	## get the uid for the user to confirm
-	uid = int(request.args['u'])
-	fn = request.args['fn']
-	ln = request.args['ln']
-	dob = request.args['dob']
-	cs = request.args['case_status']
-	cn = request.args['case_num']
-	of = request.args['office']
-	ad = request.args['address']
+	if g.user['social_worker'] == 1:
+		## get the uid for the user to confirm
+		uid = int(request.form['u'])
+		fn = request.form['fn']
+		ln = request.form['ln']
+		dob = request.form['dob']
+		cs = request.form['case_status']
+		cn = request.form['case_num']
+		of = request.form['office']
+		ad = request.form['address']
 
 
-	## make the change to the database
-	from FlaskWebProject.db import getDB
-	cur = getDB().execute('UPDATE Users SET Is_Verified=? WHERE UID_Users=?;', (1, uid))
-	getDB().commit()
-	cur.close()
+		## make the change to the database
+		from FlaskWebProject.db import getDB
+		cur = getDB().execute('UPDATE Users SET Is_Verified=? WHERE UID_Users=?;', (1, uid))
+		getDB().commit()
+		cur.close()
 
-	cur = getDB().execute('UPDATE Client SET First_Name=?, Last_Name=?, DOB=?, Address=?,' +
-		'Case_Status=?, Case_Number=?, County_Office_UID=? WHERE UID_Client=?;', (fn, ln, dob, ad, cs, cn, of, uid))
-	getDB().commit()
-	cur.close()
+		cur = getDB().execute('UPDATE Client SET First_Name=?, Last_Name=?, DOB=?, Address=?,' +
+			'Case_Status=?, Case_Number=?, County_Office_UID=? WHERE UID_Client=?;', (fn, ln, dob, ad, cs, cn, of, uid))
+		getDB().commit()
+		cur.close()
 
-	return redirect(url_for('userViews.notifications'))
+		return redirect(url_for('userViews.notifications'))
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
+
+@bp.route('/myClients', methods=('GET', 'POST'))
+@login_required
+def my_clients():
+	if g.user['social_worker'] == 1:
+
+		## get a query of all the social worker's current clients
+		clientQryStr = 'SELECT * FROM Client WHERE Social_Worker_UID=?'
+		clientQryRlt = query_db(clientQryStr, (g.user['UID_Users'],))
+
+		return render_template(
+			'socialWorkerViews/myClients.html',
+			clients=clientQryRlt,
+			year=datetime.now().year,
+			title='My Clients'
+			)
+
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
+@bp.route('/myClients/client_info', methods=('GET', 'POST'))
+@login_required
+def client_info():
+	if g.user['social_worker'] == 1:
+
+		if request.method == 'POST':
+			uid = int(request.form['uid'])
+			print('here')
+		else:
+			clientEmail = request.args.get('ce')
+			print(clientEmail)
+
+			queryStr = 'SELECT UID_Users FROM Users WHERE User_Name=?'
+			uid = int(query_db(queryStr, (clientEmail,), True)['UID_Users'])
+
+		## query string for the connected cases
+		queryStr = 'SELECT UID_Connected_Person FROM Connected_Person WHERE UID_Client=?'
+		## result form connected cases query
+		connected_cases_list = query_db(queryStr, (uid,))
+
+		## debug.... DELETE ME
+		#for clients in connected_cases_list:
+		#	print(clients)
+
+		## get the client data from the previous query
+		connected_client_list = []
+		queryStr = 'SELECT * FROM Client WHERE UID_Client=?'
+		for clients in connected_cases_list:
+			connected_client_list.append(query_db(queryStr, (clients['UID_Connected_Person'],), True))
+
+		## get the current user's data to display at the top of accordion
+		queryStr = 'SELECT * FROM Client WHERE UID_Client=?'
+		currUser = query_db(queryStr, (uid,), True)
+
+		## make sure the uid is vaild
+		if currUser is None:
+			##print('no client found with matching uid')
+			return redirect(url_for('userViews.my_clients'))
+
+		## debug.... DELETE ME
+		#print(g.user['UID_Users'])
+		#print(currUser['Social_Worker_UID'])
+
+		## get the current user's social worker data
+		queryStr = 'SELECT * FROM Social_Worker WHERE UID_Social_Worker=?'
+		socialWorker = query_db(queryStr, (currUser['Social_Worker_UID'],), True)
+
+		## make sure the uid is vaild check 2
+		if socialWorker is None:
+			##print('current user (social worker) is not the social worker of the uid client provided')
+			return redirect(url_for('userViews.my_clients'))
+
+		## get the current user's current county office
+		queryStr = 'SELECT * FROM County_Office WHERE UID_County_Office=?'
+		countyOffice = query_db(queryStr, (currUser['County_Office_UID'],), True)
+
+		## get all of the county offices
+		queryStr = 'SELECT * FROM County_Office'
+		countyOfficeList = query_db(queryStr)
+
+		return render_template(
+			'socialWorkerViews/viewClientData/viewClientData.html',
+			title='My Clients',
+			clientData=currUser,
+			connectedCases=connected_client_list,
+			countyOffice=countyOffice,
+			officeList=countyOfficeList,
+			year=datetime.now().year,
+			templateNum=0,
+			c=uid
+			)
+
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
+@bp.route('/myClients/documents', methods=('GET', 'POST'))
+@login_required
+def documents():
+	if g.user['social_worker'] == 1:
+
+		if request.method == 'POST':
+			uid = int(request.form['uid'])
+		else:
+			clientEmail = request.args.get('ce')
+
+			queryStr = 'SELECT UID_Users FROM Users WHERE User_Name=?'
+			uid = int(query_db(queryStr, (clientEmail,), True)['UID_Users'])
+
+		queryStr = 'SELECT * FROM Uploads WHERE Client_UID=?'
+		qryResult = query_db(queryStr, (uid,))
+
+		return render_template(
+			'socialWorkerViews/viewClientData/viewClientData.html',
+			templateNum=1,
+			year=datetime.now().year,
+			title='My Clients',
+			uploads=qryResult,
+			c=uid
+			)
+
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
+@bp.route('/myClients/deadlines', methods=('GET', 'POST'))
+@login_required
+def deadlines():
+	if g.user['social_worker'] == 1:
+
+
+		return render_template(
+			'socialWorkerViews/viewClientData/viewClientData.html',
+			templateNum=2,
+			year=datetime.now().year,
+			title='My Clients'
+			)
+
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
+def check_for_vaild_args(args=()):
+	for a in args:
+		if a is None or a == '':
+			return False
+		
+	return True
+
+
+@bp.route('/myClients/update/clientData', methods=('GET', 'POST'))
+@login_required
+def update_clientData():
+	if g.user['social_worker'] == 1:
+		fn = request.form['fn']
+		ln = request.form['ln']
+		dob = request.form['dob']
+		ad = request.form['address']
+
+
+		if request.method == 'POST':
+			uid = int(request.form['uid'])
+		else:
+			clientEmail = request.args.get('ce')
+
+			queryStr = 'SELECT UID_Users FROM Users WHERE User_Name=?'
+			uid = int(query_db(queryStr, (clientEmail,), True)['UID_Users'])
+
+		if check_for_vaild_args((fn,ln,dob,ad,uid)):
+			curr = db.getDB().execute('UPDATE Client SET First_Name=?, Last_Name=?, DOB=?, Address=? WHERE UID_Client=?', (fn,ln,dob,ad,uid))
+			db.getDB().commit()
+			curr.close()
+
+		queryStr = 'SELECT User_Name FROM Users WHERE UID_Users=?'
+		c_email = query_db(queryStr, (uid,), True)
+
+		## todo: display unable to update
+		return redirect(url_for('userViews.client_info', ce=c_email['User_Name']))
+
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
+@bp.route('/myClients/update/officeData', methods=('GET', 'POST'))
+@login_required
+def update_clientOfficeData():
+	if g.user['social_worker'] == 1:
+		of = request.form['office']
+		
+		if request.method == 'POST':
+			uid = int(request.form['uid'])
+		else:
+			clientEmail = request.args.get('ce')
+
+			queryStr = 'SELECT UID_Users FROM Users WHERE User_Name=?'
+			uid = int(query_db(queryStr, (clientEmail,), True)['UID_Users'])
+
+		if check_for_vaild_args((of,uid)):
+			curr = db.getDB().execute('UPDATE Client SET County_Office_UID=? WHERE UID_Client=?', (of,uid))
+			db.getDB().commit()
+			curr.close()
+		else:
+			print('invaild args' + of + uid)
+
+
+		queryStr = 'SELECT User_Name FROM Users WHERE UID_Users=?'
+		c_email = query_db(queryStr, (uid,), True)
+
+		## todo: display unable to update
+		return redirect(url_for('userViews.client_info', ce=c_email['User_Name']))
+
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
