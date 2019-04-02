@@ -68,6 +68,7 @@
     <Folder Include="FlaskWebProject\templates\userViews\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FlaskWebProject\database\database_fields.pdf" />
     <Content Include="FlaskWebProject\database\db.sqlite" />
     <Content Include="FlaskWebProject\database\DB_Relations.jpg" />
     <Content Include="FlaskWebProject\static\img\NoImageIcon.png" />

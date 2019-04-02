@@ -497,12 +497,25 @@ def documents():
 def deadlines():
 	if g.user['social_worker'] == 1:
 
+		## TODO: put this block into a function.... It is repeated like 5 times in this doc.
+		if request.method == 'POST':
+			uid = int(request.form['uid'])
+		else:
+			clientEmail = request.args.get('ce')
+
+			queryStr = 'SELECT UID_Users FROM Users WHERE User_Name=?'
+			uid = int(query_db(queryStr, (clientEmail,), True)['UID_Users'])
+
+		eventQryStr = 'SELECT * FROM Calendar WHERE User_UID=? OR User_UID=?'
+		eventQryRlt = query_db(eventQryStr, (uid,-1))
 
 		return render_template(
 			'socialWorkerViews/viewClientData/viewClientData.html',
 			templateNum=2,
 			year=datetime.now().year,
-			title='My Clients'
+			title='My Clients',
+			events=eventQryRlt,
+			c=uid
 			)
 
 	else:
@@ -516,6 +529,37 @@ def check_for_vaild_args(args=()):
 			return False
 		
 	return True
+
+
+@bp.route('/myClients/update/deadlines', methods=('GET', 'POST'))
+@login_required
+def update_deadlines():
+	if g.user['social_worker'] == 1:
+		## TODO: put this block into a function.... It is repeated like 5 times in this doc.
+		if request.method == 'POST':
+			uid = int(request.form['uid'])
+			e_id = int(request.form['e_id'])
+			e_name = request.form['e_name']
+			e_des = request.form['e_des']
+			e_date = request.form['e_date']
+			ec_r = int(request.form['ec_r'])
+			ec_g = int(request.form['ec_g'])
+			ec_b = int(request.form['ec_b'])
+
+			if check_for_vaild_args((e_name,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id)):
+				curr = db.getDB().execute('UPDATE Calendar SET Event_Name=?, Event_Date_Day=?, Event_Date_Month=?, Event_Date_Year=?, Event_Descripton=?, Color_R=?, Color_G=?, Color_B=? WHERE User_UID=? AND UUID_Calendar=?', (e_name,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id))
+				db.getDB().commit()
+				curr.close()
+		else:
+			clientEmail = request.args.get('ce')
+			print('No uid in POST request... Redirecting...')
+			return redirect(url_for('userViews.client_info', ce=clientEmail))
+
+		return redirect(url_for('userViews.deadlines', ce=clientEmail))
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
 
 
 @bp.route('/myClients/update/clientData', methods=('GET', 'POST'))
