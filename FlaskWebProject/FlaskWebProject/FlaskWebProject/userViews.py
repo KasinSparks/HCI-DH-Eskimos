@@ -531,6 +531,7 @@ def check_for_vaild_args(args=()):
 	return True
 
 
+
 @bp.route('/myClients/update/deadlines', methods=('GET', 'POST'))
 @login_required
 def update_deadlines():
@@ -546,8 +547,13 @@ def update_deadlines():
 			ec_g = int(request.form['ec_g'])
 			ec_b = int(request.form['ec_b'])
 
-			if check_for_vaild_args((e_name,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id)):
-				curr = db.getDB().execute('UPDATE Calendar SET Event_Name=?, Event_Date_Day=?, Event_Date_Month=?, Event_Date_Year=?, Event_Descripton=?, Color_R=?, Color_G=?, Color_B=? WHERE User_UID=? AND UUID_Calendar=?', (e_name,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id))
+			dateComponents = e_date.split('-')
+			e_year = int(dateComponents[0])
+			e_month = int(dateComponents[1])
+			e_day = int(dateComponents[2])
+
+			if check_for_vaild_args((e_name,e_date,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id)):
+				curr = db.getDB().execute('UPDATE Calendar SET Event_Name=?, Date=?, Event_Date_Day=?, Event_Date_Month=?, Event_Date_Year=?, Event_Description=?, Color_R=?, Color_G=?, Color_B=? WHERE User_UID=? AND UUID_Calendar=?', (e_name,e_date,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id))
 				db.getDB().commit()
 				curr.close()
 		else:
@@ -555,7 +561,9 @@ def update_deadlines():
 			print('No uid in POST request... Redirecting...')
 			return redirect(url_for('userViews.client_info', ce=clientEmail))
 
-		return redirect(url_for('userViews.deadlines', ce=clientEmail))
+		queryStr = 'SELECT User_Name FROM Users WHERE UID_Users=?'
+		c_email = query_db(queryStr, (uid,), True)
+		return redirect(url_for('userViews.deadlines', ce=c_email['User_Name']))
 	else:
 		## current person logged in is not a social worker
 		redirect(url_for('auth.login'))

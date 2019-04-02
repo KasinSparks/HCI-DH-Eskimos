@@ -108,38 +108,37 @@
 
     {% elif templateNum == 2 %}
         {% for event in events %}
-            <button class="accordion">
-                <span style="background-color: rgb({{ event.Color_R }},{{ event.Color_G }},{{ event.Color_B }}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
-                {{ event.Event_Name|e }}, {{ event.Event_Date_Month }} / {{ event.Event_Date_Day }} / {{ event.Event_Date_Year }}
-            </button>
-            <div class="clientInfo">
-                <form action="{{ url_for('userViews.update_deadlines') }}" method="post">
-                    <label for="e_name">Event Name</label>
-                    <input type="text" name="e_name" value="{{ event.Event_Name|e }}" />
-                    <br />
-                    <label for="e_des">Event Description</label>
-                    <input type="text" name="e_des" value="{{ event.Event_Description|e }}" />
-                    <br />
-                    <label for="e_day">Month</label>
-                    <input type="date" name="dob" value="{{ event.Event_Month }}" />
-                    <label for="e_day">Day</label>
-                    <input type="date" name="dob" value="{{ event.Event_Day }}" />
-                    <label for="e_day">Day</label>
-                    <input type="date" name="dob" value="{{ event.Event_Year }}" />
-                    <br />
-                    <h3>Dot Color</h3>
-                    <label for="ec_r">Red</label>
-                    <input type="number" name="ec_" value="{{ event.Color_R }}" />
-                    <label for="ec_g">Green</label>
-                    <input type="number" name="ec_" value="{{ event.Color_G }}" />
-                    <label for="ec_b">Blue</label>
-                    <input type="number" name="ec_" value="{{ event.Color_B }}" />
+            <!-- Only show the selected client's deadlines -->
+            {% if event.User_UID == c %}
+                <button class="accordion">
+                    <span style="background-color: rgb({{ event.Color_R }},{{ event.Color_G }},{{ event.Color_B }}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
+                    {{ event.Event_Name|e }}, {{ event.Event_Date_Month }} / {{ event.Event_Date_Day }} / {{ event.Event_Date_Year }}
+                </button>
+                <div class="clientInfo">
+                    <form action="{{ url_for('userViews.update_deadlines') }}" method="post">
+                        <label for="e_name">Event Name</label>
+                        <input type="text" name="e_name" value="{{ event.Event_Name|e }}" />
+                        <br />
+                        <label for="e_des">Event Description</label>
+                        <input type="text" name="e_des" value="{{ event.Event_Description|e }}" />
+                        <br />
+                        <label for="e_date">Month</label>
+                        <input type="date" name="e_date" value="{{ event.Date }}" />
+                        <br />
+                        <h3>Dot Color</h3>
+                        <label for="ec_r">Red</label>
+                        <input type="number" name="ec_r" value="{{ event.Color_R }}" />
+                        <label for="ec_g">Green</label>
+                        <input type="number" name="ec_g" value="{{ event.Color_G }}" />
+                        <label for="ec_b">Blue</label>
+                        <input type="number" name="ec_b" value="{{ event.Color_B }}" />
 
-                    <input type="number" name="e_id" value="{{ event.UUID_Calendar }}" hidden />
-                    <input type="number" name="uid" value="{{ event.User_UID }}" hidden />
-                    <button name="submit" type="submit">Update Info</button>
-                </form>
-            </div>
+                        <input type="number" name="e_id" value="{{ event.UUID_Calendar }}" hidden />
+                        <input type="number" name="uid" value="{{ c }}" hidden />
+                        <button name="submit" type="submit">Update Info</button>
+                    </form>
+                </div>
+            {% endif %}
         {% endfor %}
     {% else %}
 <p>template number not implemented!</p>
