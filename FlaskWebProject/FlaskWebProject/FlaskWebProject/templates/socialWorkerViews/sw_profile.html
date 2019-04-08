@@ -1,0 +1,25 @@
+﻿{% extends 'layout.html' %}
+
+	{% block content %}
+
+	<!--social worker's data-->
+	<button class="accordion">Your Social Worker</button>
+	<div class="clientInfo">
+		<ul>
+			<li>First Name: {{ worker.First_Name|e }}</li>
+			<li>Last Name: {{ worker.Last_Name|e }}</li>
+			<li>Email: {{ worker.Email|e}}</li>
+		</ul>
+	</div>
+
+	<!--user's current county office data-->
+	<button class="accordion">Your County Office</button>
+	<div class="clientInfo">
+		<ul>
+			<li>Office Name: {{ countyOffice.Office_Name|e }}</li>
+			<li>Address: {{ countyOffice.Address|e }}</li>
+			<li>Phone: {{ countyOffice.Phone|e}}</li>
+		</ul>
+	</div>
+
+{% endblock content %}

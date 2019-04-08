@@ -1,0 +1,50 @@
+﻿{% extends 'layout.html' %}
+
+	{% block content %}
+
+	<!--current user's data-->
+	<button class="accordion">{{ clientData.Last_Name|e }}, {{ clientData.First_Name|e }}</button>
+	<div class="clientInfo">
+		<ul>
+			<li>First Name: {{ clientData.First_Name|e }}</li>
+			<li>Last Name: {{ clientData.Last_Name|e }}</li>
+			<li>Date of Birth: {{ clientData.DOB }}</li>
+			<li>Date of Birth: {{ clientData.Address|e }}</li>
+		</ul>
+	</div>
+
+	<!--use for a guide on how to do the accordion-->
+	<!--https://www.w3schools.com/howto/howto_js_accordion.asp-->
+	{% for user in connectedCases %}
+		<button class="accordion">{{ user.Last_Name|e }}, {{ user.First_Name|e }}</button>
+		<div class="clientInfo">
+			<ul>
+				<li>First Name: {{ user.First_Name|e }}</li>
+				<li>Last Name: {{ user.Last_Name|e }}</li>
+				<li>Date of Birth: {{ user.DOB }}</li>
+				<li>Date of Birth: {{ user.Address|e }}</li>
+			</ul>
+		</div>
+	{% endfor %}
+
+	<!--social worker's data-->
+	<button class="accordion">Your Social Worker</button>
+	<div class="clientInfo">
+		<ul>
+			<li>First Name: {{ worker.First_Name|e }}</li>
+			<li>Last Name: {{ worker.Last_Name|e }}</li>
+			<li>Email: {{ worker.Email|e}}</li>
+		</ul>
+	</div>
+
+	<!--user's current county office data-->
+	<button class="accordion">Your County Office</button>
+	<div class="clientInfo">
+		<ul>
+			<li>Office Name: {{ countyOffice.Office_Name|e }}</li>
+			<li>Address: {{ countyOffice.Address|e }}</li>
+			<li>Phone: {{ countyOffice.Phone|e}}</li>
+		</ul>
+	</div>
+
+{% endblock content %}

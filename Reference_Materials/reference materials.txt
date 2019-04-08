@@ -1,15 +1,17 @@
 ---------------------- Flask and Python --------------------------------
-* https://www.youtube.com/watch?v=pP23CtOI-1U
-* https://www.youtube.com/watch?v=j5wysXqaIV8
-* https://www.youtube.com/watch?v=zzDUnnj2p8I
+* Python and Flask - CS50 Beyond 2019	 https://www.youtube.com/watch?v=pP23CtOI-1U
+* Flask - Lecture 2 - CS50's Web Programming with Python and JavaScript		https://www.youtube.com/watch?v=j5wysXqaIV8
+* CS50 2018 - Lecture 7 - Web Programming	https://www.youtube.com/watch?v=zzDUnnj2p8I
 
 ---------------------------- SQL ---------------------------------------
-* https://www.youtube.com/watch?v=gu980iXwY5c
-* https://www.youtube.com/watch?v=LxDetsPQAPQ
+* SQL - CS50 Beyond 2019	https://www.youtube.com/watch?v=gu980iXwY5c
+* CS50 2018 - Lecture 8 - SQL	https://www.youtube.com/watch?v=LxDetsPQAPQ
+* DB Browser for SQLite		https://sqlitebrowser.org/
 
 ------------------------ Javascript ------------------------------------
-* https://www.youtube.com/watch?v=dlEPkLSDQi0
-* https://www.youtube.com/watch?v=XNDZ3eg_VcE
+* JavaScript - CS50 Beyond 2019		https://www.youtube.com/watch?v=dlEPkLSDQi0
+* JavaScript, continued - CS50 Beyond 2019	https://www.youtube.com/watch?v=XNDZ3eg_VcE
 
 --------------- HTML Image Capture and Upload --------------------------
-* https://developers.google.com/web/fundamentals/media/capturing-images/
+* Capturing an Image from the User	https://developers.google.com/web/fundamentals/media/capturing-images/
+
