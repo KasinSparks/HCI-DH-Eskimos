@@ -7,7 +7,7 @@
         <!--viewport metas go here-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="base.css">
+        <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="styles.css">
     </head>
 
@@ -17,47 +17,125 @@
     		<a class="web_title" href="index.html">OKDHS Adult and Family Services Information Center</a>
 
             <nav class="generalNav">
-                <ul>
-                    <li><a href="profile.html"><img src="" alt="profile">Profile</a></li>
-                    <li><a href="calendar.html"><img src="" alt="calendar">Calendar</a></li>
-                    <li><a href=""><img src="" alt="upload">Uploads</a></li>
-                    <li><a href="help1.html"><img src="" alt="help">Help</a></li>
-                </ul>
+                <div class="navRow">
+                    <div class="navItem navCol"><a href="profile.html"><img src="images/profile.PNG" alt="profile"></a></div>
+                    <div class="navItem navCol"><a href="calendar1.html"><img src="images/calendar.PNG" alt="calendar"></a></div>
+                    <div class="navItem navCol"><a href=""><img src="images/upload.PNG" alt="upload"></a></div>
+                    <div class="navItem navCol"><a href="help1.html"><img src="images/help.PNG" alt="help"></a></li></div>
+                </div>
             </nav>
     	</header>
 
     	<article>
-    		<h1>Your Profile</h1>
-            <section class="addClient">
-                <h2>Client Information</h2>
-                <form>
-                    <label>Case Number:</label>
-                    <input type="text" placeholder="c4501546" required><br>
+            <!----------------------------------------------------------------------------------
+            ----------------------------------DESKTOP VERSION-----------------------------------
+            ------------------------------------------------------------------------------------>
+            <div  class="desktopVer">
+                <h1>Your Profile</h1>
 
-                    <label>Number of Persons:</label>
-                    <input type="text" placeholder="3" required><br>
+                <div class="outerRow">
 
-                    <label>Primary Address:</label>
-                    <input type="text" placeholder="The Shire" required><br>
+                    <div class="outerCol">
+                        <h2>Case Information</h2>
+                        
+                        <div class="form_container">
+                        <form>
+                            <div class="row">
+                            <label class="col1">Case Number:</label>
+                            <input class="col2" type="text" placeholder="c4501546" required><br>
+                            </div>
 
-                    <label>County Office:</label>
-                    <input type="text" placeholder="55c" required><br>
+                            <div class="row">
+                            <label class="col1">Number of Persons:</label>
+                            <input class="col2" type="text" placeholder="3" required><br>
+                            </div>
 
-                    <label>Case Worker:</label>
-                    <input type="text" placeholder="" required><br>
+                            <div class="row">
+                            <label class="col1">Primary Address:</label>
+                            <input class="col2" type="text" placeholder="The Shire" required><br>
+                            </div>
 
-                    <label>Case Worker email:</label>
-                    <input type="text" placeholder="" required><br>
+                            <div class="row">
+                            <label class="col1">County Office:</label>
+                            <input class="col2" type="text" placeholder="55c" required><br>
+                            </div>
 
-                    
-                </form>
-            </section>
-            
-           
+                            <div class="row">
+                            <label class="col1">Case Worker:</label>
+                            <input class="col2" type="text" placeholder="" required><br>
+                            </div>
+
+                            <div class="row">
+                            <label class="col1">Case Worker email:</label>
+                            <input class="col2" type="text" placeholder="" required><br>  
+                            </div>                  
+                        </form>
+                        </div>
+
+
+                        <div class="household_members">
+                            <button class="modalActivator">Gandalf Greyhame</button>
+                            <button class="modalActivator">Frodo Baggins</button>
+                            <button class="modalActivator">Samwise Gangee</button>
+
+                        </div>
+                    </div><!--END OF DIV OUTERCOL 1-->
+
+               
+                    <div class="outerCol">
+                        <p>Do you see something that is incorrect or outdated?</p>
+                        <button type="button">Request a Change</button><br>
+                    </div>
+
+                </div><!--END OF DIV - OUTER ROW-->
+
+            </div><!---END OF DIV - DESKTOP VERSION-->
+
+
+            <!----------------------------------------------------------------------------------
+            ----------------------------------MOBILE VERSION-----------------------------------
+            ------------------------------------------------------------------------------------>
+            <div class="mobileVer">
+                <h1>Your Profile</h1>
             <section>
-                <p>Do you see something that is incorrect or outdated?</p>
-                <button type="button">Request a Change</button><br>
+                <div class="clients">
+                    <button class="accordion">Person 1</button>
+                    <div class="content">
+                        <p>dsfusiofvfdijvovnsnv</p>
+                    </div>
+
+                    <button class="accordion">Person 2</button>
+                    <div class="content">
+                        <p>dsfusiofvfdijvovnsnv</p>
+                    </div>
+
+                    <button class="accordion">Person 3</button>
+                    <div class="content">
+                        <p>dsfusiofvfdijvovnsnv</p>
+                    </div>
+                </div>  
             </section>
+
+            <section>
+                <p>Is any of this information incorrect?</p>
+                <button class="request">Request an Update</button>
+            </section>
+
+            <section>
+                <div class="office">
+                    <button class="accordion">Your Social Worker</button>
+                    <div class="content">
+                        <p>dsfusiofvfdijvovnsnv</p>
+                    </div>
+
+                    <button class="accordion">Your County Office</button>
+                    <div class="content">
+                        <p>dsfusiofvfdijvovnsnv</p>
+                    </div>
+                </div>
+            </section>
+            </div>
+
     	</article>
     </body>
 </html>

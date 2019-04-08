@@ -1,0 +1,198 @@
+/***************************GENERAL***************************/
+body{text-align: center;}
+
+header{
+	background-color: #DAC0BA;
+	/*padding: 20px;*/
+}
+header a:link, header a:visited{
+	color: black;
+	text-decoration: none;
+}
+
+article{
+	background-color: lightgrey;
+	/*padding-bottom: 50px; /*might not be necessary, just look better for now, 2:03PM 4/8/2019;*/
+}
+
+* {box-sizing: border-box;}
+
+/*div{border: 1px solid black;}*/
+
+
+
+
+/**************SMALL DEVICES(phones, 767px and down)**************/
+@media only screen and (max-width: 767px) {
+
+	/************************************************/
+	/*******************GENERAL LAYOUT*****************/
+	/************************************************/
+	/*generic*/
+	html{background-color: white;}
+	.desktopVer{display: none;}
+
+	/*header*/
+	.logo, .web_title {display: none;}
+	.web_title {font-size: x-large;}
+
+	/*page title*/
+	h1{
+		font-size: x-large;
+		padding: 5%;
+	}
+
+	/*navigation bar*/
+	.generalNav{
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+	.navCol{
+		border: 1px solid black;
+		width: 25%;
+		float: left;
+		height: auto;
+	}
+	.navCol img{
+		max-width: 100%;
+	}
+	/************************************************/
+	/*******************END OF GEN LAYOUT*****************/
+	/************************************************/
+
+
+
+
+	/************************************************/
+	/*******************  PROFILE  ******************/
+	/************************************************/
+	section{
+		padding-bottom: 20px;
+	}
+	.accordion{
+		width: 100%;
+		padding: 5px;
+		padding-left: 10px;
+		text-align: left;
+	}
+	.content{
+		padding: 10px;
+		display: none;
+		overflow: hidden;
+		text-align: left;
+	}
+	/************************************************/
+	/*******************END OF PROFILE*****************/
+	/************************************************/
+} 
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	html{background-color: red;}
+
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	html{background-color: blue;}
+	.mobileVer{display: none;}
+	.desktopVer{
+		border: 1px solid black;
+		width: 70%;
+		padding: 20px;
+		margin-left: auto;
+		margin-right: auto;
+		overflow: auto;
+	}
+
+
+	/*header*/
+	.web_title {font-size: xx-large;}
+
+
+	/*section*/
+	section{padding-top: 50px;}
+	h1{
+		font-size: x-large;
+		padding-bottom: 20px;
+		text-decoration: underline;
+		
+	}
+	h2{
+		font-size: large;
+		text-decoration: underline;
+	}
+
+    /************************************************/
+	/********************LOGIN PAGE******************/
+	/************************************************/
+	/*form*/
+	label{
+		text-align: left;
+		display: inline-block;
+		padding: 12px 12px 12px 2px;
+		
+	}
+	input[type=text]{
+		display: inline-block;
+		padding: 10px;
+		border: 1px solid black;
+	}
+
+	.form_container{
+		padding: 10px;
+	}
+	.col1{
+		float: left;
+		width: 35%;
+	}
+	.col2{
+		float: left;
+		width: 65%;
+	}
+
+	.row{padding-bottom: 5px}
+	.row:after {
+		content: "";
+	 	display: table;
+		clear: both;
+	}
+	/************************************************/
+	/*******************END OF LOGIN*****************/
+	/************************************************/
+
+
+
+
+	/************************************************/
+	/*******************  PROFILE  ******************/
+	/************************************************/
+	.outerCol{
+		width: 50%;
+		float: left;
+	}
+	.outerRow:after {
+		content: "";
+	 	display: table;
+		clear: both;
+	}
+	.household_members {
+		padding: 10px;
+	}
+
+	.household_members button{
+		display: block;
+		width: 200px;
+		padding: 5px 0px 5px 0px;
+	}
+	/************************************************/
+	/*******************END OF PROFILE******************/
+	/************************************************/
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	html{background-color: green;}
+}
