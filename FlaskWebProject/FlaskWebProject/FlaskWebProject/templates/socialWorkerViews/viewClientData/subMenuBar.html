@@ -1,0 +1,30 @@
+﻿<td>
+    <table>
+        <tr>
+            <td>
+                <a href="{{ url_for('userViews.my_clients') }}">Go Back</a>
+            </td>
+    
+            <td>
+                <form action="{{ url_for('userViews.client_info') }}" method="post">
+                    <input hidden value="{{ c }}" name="uid" />
+                    <button type="submit">Client Info</button>
+                </form>
+            </td>
+    
+            <td>
+                <form action="{{ url_for('userViews.documents') }}" method="post">
+                    <input hidden value="{{ c }}" name="uid" />
+                    <button type="submit">Documents</button>
+                </form>
+            </td>
+       
+            <td>
+                <form action="{{ url_for('userViews.deadlines') }}" method="post">
+                    <input hidden value="{{ c }}" name="uid" />
+                    <button type="submit">Deadlines</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
