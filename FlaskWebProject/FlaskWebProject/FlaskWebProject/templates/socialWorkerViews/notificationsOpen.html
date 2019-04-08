@@ -1,0 +1,78 @@
+﻿{% extends 'layout.html' %}
+
+{% block content %}
+    <table style="border-collapse: collapse;">
+        <tr>
+            <th>UID Client</th>
+            <th>Notification Type</th>
+            <th>Has Been Read</th>
+        </tr>
+        <tr>
+            <td style="border:solid 1px black">{{ notification.UID_Client }}</td>
+            <td style="border:solid 1px black">{{ notification.Notification_Type }}</td>
+            <td style="border:solid 1px black">{{ notification.Has_Been_Read }}</td>
+        </tr>
+    </table>
+
+    <br />
+    <br />
+    {% if notification.Notification_Type == 1 %}
+        {% if verified.Is_Verified == 0 %}
+            <form action="../account/confirm" method="post">
+                <label for="fn">First Name:</label>
+                <input type="text" name="fn" value="{{ clientData.First_Name|e }}"/>
+                <br />
+                <label for="ln">Last Name:</label>
+                <input type="text" name="ln" value="{{ clientData.Last_Name|e }}"/>
+                <br />
+                <label for="dob">Date of Birth</label>
+                <input type="date" name="dob" value="{{ clientData.DOB }}"/>
+                <br />
+                <label for="address">Address</label>
+                <input type="text" name="address" value="{{ clientData.Address }}"/>
+                <br />
+                <label for="case_status">Case Status</label>
+                <input type="text" name="case_status" value="{{ clientData.Case_Status }}"/>
+                <br />
+                <label for="case_num">Case Number</label>
+                <input type="number" name="case_num" value="{{ clientData.Case_Number }}"/>
+                <br />
+                <label for="office">County Office UID</label>
+                <input type="text" name="office" value="{{ clientData.County_Office_UID }}"/>
+                <br />
+                <label for="verified">Has been Verified</label>
+                <input type="number" name="verified" disabled value="{{ verified.Is_Verified }}"/>
+                <input type="number" name="u" hidden value="{{ notification.UID_Client }}"/>
+                <br />
+                <button type="submit">Confirm Account</button>
+            </form>
+        {% else %}
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
+                    <th>Case Status</th>
+                    <th>Case Number</th>
+                    <th>County Office</th>
+                    <th>Has Been Verified</th>
+                </tr>
+                <tr>
+                    <td style="border:solid 1px black">{{ clientData.First_Name|e }}</td>
+                    <td style="border:solid 1px black">{{ clientData.Last_Name|e }}</td>
+                    <td style="border:solid 1px black">{{ clientData.DOB }}</td>
+                    <td style="border:solid 1px black">{{ clientData.Address }}</td>
+                    <td style="border:solid 1px black">{{ clientData.Case_Status }}</td>
+                    <td style="border:solid 1px black">{{ clientData.Case_Number }}</td>
+                    <td style="border:solid 1px black">{{ clientData.County_Office_UID }}</td>
+                    <td style="border:solid 1px black">{{ verified.Is_Verified }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    {% else %}
+        <p>Notification Type not yet implemented!</p>
+    {% endif %}
+
+    <button onclick="window.history.back();">Go Back</button>
+{% endblock content %}
