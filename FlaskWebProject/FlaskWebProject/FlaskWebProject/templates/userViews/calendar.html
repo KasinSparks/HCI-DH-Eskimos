@@ -1,74 +1,104 @@
 ﻿{% extends "layout.html" %}
 
 {% block content %}
-	<div>
-		<h2>
-			<a href="{{ url_for('userViews.calendar') }}?month={{ prevMonth }}&year={{ prevYear }}"> < </a>
-			{{ monthName }} | {{ year }}
-			<a href="{{ url_for('userViews.calendar') }}?month={{ nextMonth }}&year={{ nextYear }}"> > </a>
-		</h2>
-	</div>
-	<table style="border-collapse: collapse;">
-		<tr>
-			<th>Sun</th>
-			<th>Mon</th>
-			<th>Tue</th>
-			<th>Wed</th>
-			<th>Thur</th>
-			<th>Fri</th>
-			<th>Sat</th>
-		</tr>
-		{% for row in calData %}
-			<tr>
-				{% for data in row %}
-					{% if data != 0 %}
-						{% if data == currDate.day and year == currDate.year and month == currDate.month %}
-							<td style="background-color: turquoise; width:32px; height:32px; text-align:center; vertical-align:top; border: 3px solid black;">
-						{% else %}
-							<td style="width:32px; height:32px; text-align:center; vertical-align:top; border: 1px solid black;">
-						{% endif %}
 
-								{{ data }}
-								<div>
-									{% for deadline in deadlines %}
-										{% if deadline.Event_Date_Day == data %}
-											<span style="background-color: rgb({{deadline.Color_R}},{{deadline.Color_G}},{{deadline.Color_B}}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
-										{% endif %}
-									{% endfor %}
-								</div>
+	<link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+
+	<div class="calendar-header">
+		<h>OKDHS AFS Events and Program Deadlines</h>
+		<hr />
+	</div>
+
+	<div class="hidden-container">
+
+		<div class="calendar-container">
+
+			<div class="calendar">
+
+				<div class="calendar-date">
+						<a style="position: absolute; top: 5px; left: 10px;" href="{{ url_for('userViews.calendar') }}?month={{ prevMonth }}&year={{ prevYear }}"> <img src="/static/img/left_arrow.png"> </a>
+						{{ monthName }} {{ year }}
+						<a style="position: absolute; top: 5px; right: 10px" href="{{ url_for('userViews.calendar') }}?month={{ nextMonth }}&year={{ nextYear }}"> <img src="/static/img/right_arrow.png"> </a>
+				</div>
+
+				<table style="border-collapse: collapse;">
+					<tr style="border: 1px solid black;">
+						<th>Sun</th>
+						<th>Mon</th>
+						<th>Tue</th>
+						<th>Wed</th>
+						<th>Thur</th>
+						<th>Fri</th>
+						<th>Sat</th>
+					</tr>
+					{% for row in calData %}
+						<tr>
+							{% for data in row %}
+								{% if data != 0 %}
+									{% if data == currDate.day and year == currDate.year and month == currDate.month %}
+										<td style="background-color: turquoise; width:75; height:75; text-align:left; vertical-align:top; border: 3px solid black; padding: 5px;">
+									{% else %}
+										<td style="width:75; height:75; text-align:left; vertical-align:top; border: 1px solid black; padding: 5px;">
+									{% endif %}
+
+											{{ data }}
+											<div>
+												{% for deadline in deadlines %}
+													{% if deadline.Event_Date_Day == data %}
+														<span style="background-color: rgb({{deadline.Color_R}},{{deadline.Color_G}},{{deadline.Color_B}}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
+													{% endif %}
+												{% endfor %}
+											</div>
+										</td>
+								{% else %}
+									<td style="width:75; height:75; text-align:left; vertical-align:top; border: 1px solid black; padding: 5px;">
+										
+									</td>
+								{% endif %}
+							{% endfor %}
+						</tr>
+					{% endfor %}
+				</table>
+
+			</div>
+
+		</div>
+
+		<div class="deadline-container">
+
+			<div class="deadlines">
+
+				<div style="text-align: center;">
+					<h2>Upcoming Deadlines</h2>
+					<hr />
+					<br />
+				</div>
+
+				<table style="border: 1px solid black;">
+					<tr style="background: #d8d8d8;">
+						<th></th>
+						<th style="width: 250px;">Name</th>
+						<th style="text-align: center; width: 150px; border-left: 1px solid black;">Date</th>
+					</tr>
+
+
+					{% for deadline in deadlines %}
+						<tr>
+							<td>
+								<span style="margin: 0px 5px 0px 5px; background-color: rgb({{deadline.Color_R}},{{deadline.Color_G}},{{deadline.Color_B}}); height: 12px; width: 12px; border-radius: 50%; display: inline-block;"></span>
 							</td>
-					{% else %}
-						<td style="width:32px; height:32px">  </td>
-					{% endif %}
-				{% endfor %}
-			</tr>
-		{% endfor %}
-	</table>
+							<td>{{ deadline.Event_Name|e }}</td>
+							<td style="text-align: center; border-left: 1px solid black;">
+								{{ deadline.Event_Date_Month }}/{{ deadline.Event_Date_Day }}/{{ deadline.Event_Date_Year }}
+							</td>
 
-	<div>
-		<h2>Upcoming Deadlines</h2>
-		<br />
+						</tr>
+					{% endfor %}
+				</table>
+				
+			</div>
+
+		</div>
+
 	</div>
-
-	<table>
-		<tr>
-			<th></th>
-			<th>Name</th>
-			<th>Date</th>
-		</tr>
-
-
-		{% for deadline in deadlines %}
-			<tr>
-				<td>
-					<span style="background-color: rgb({{deadline.Color_R}},{{deadline.Color_G}},{{deadline.Color_B}}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
-				</td>
-				<td>{{ deadline.Event_Name|e }}</td>
-				<td>
-					{{ deadline.Event_Date_Month }}/{{ deadline.Event_Date_Day }}/{{ deadline.Event_Date_Year }}
-				</td>
-
-			</tr>
-		{% endfor %}
-	</table>
 {% endblock content %}

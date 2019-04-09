@@ -40,3 +40,55 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/* ---------- Calendar CSS ---------- */
+
+.deadline-container tr:nth-child(odd) {
+    background-color: #efefef;
+}
+
+.deadline-container td {
+    height: 50px;
+}
+
+.calendar-header {
+    text-align: center;
+    font-size: 30px;
+}
+
+.hidden-container {
+    overflow: hidden;
+}
+
+.deadline-container {
+    float: left;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-container {
+    float: right;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar {
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.deadlines {
+    display: inline-block;
+}
+
+.calendar-date {
+    border: 1px solid black;
+    font-size: 20px;
+    position: relative;
+    height: 29px;
+    text-align: center;
+}
