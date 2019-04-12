@@ -1,12 +1,29 @@
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    font-family: 'Lato', sans-serif;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/* ---------- Layout Page ---------- */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.content {
+    display: inline-block;
+    width: 70%;
+    padding: 40px 10px 40px 10px;
+    border: 1px solid lightgrey
+}
+
+.title {
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.navbar {
+    width: 100px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
