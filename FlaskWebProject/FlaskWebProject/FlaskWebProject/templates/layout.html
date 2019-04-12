@@ -4,40 +4,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - My Flask Application</title>
-    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <!--link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" /-->
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">Login Page</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('userViews.profile') }}">Profile</a></li>
-                    {% if g.user['Social_Worker'] == 1 %}
-                        <li><a href="{{ url_for('userViews.notifications') }}">Notifications</a></li>
-                        <li><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('userViews.uploads') }}">Uploads</a></li>
-                        <li><a href="{{ url_for('userViews.calendar') }}">Calendar</a></li>
-                    {% endif %}
-                    <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
-                </ul>
-            </div>
+    <div class="myBanner">
+        <img class="dhslogo" src="" alt="DHS logo">
+        <a class="web_title" href="profile.html">OKDHS Adult and Family Services Information Center</a>
+
+        <div class="generalNav">
+            <div class="navRow"><!--this is for mobile-->
+                <div class="navCol navItem"><a href="{{ url_for('userViews.profile') }}">PROFILE</a></div>
+                {% if g.user['Social_Worker'] == 1 %}
+                <div class="navCol navItem"><a href="{{ url_for('userViews.notifications') }}">Notifications</a></div>
+                <div class="navCol navItem"><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></div>
+                {% else %}
+                <div class="navCol navItem"><a href="{{ url_for('userViews.uploads') }}">Uploads</a></div>
+                <div class="navCol navItem"><a href="{{ url_for('userViews.calendar') }}">Calendar</a></div>
+                {% endif %}
+                <div class="navCol navItem"><a href="{{ url_for('auth.logout') }}">Sign Out</a></div>
+            </div> 
         </div>
     </div>
 
     <div class="container body-content">
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
         <hr />
         <footer>
             <p>&copy; {{ year }} - My Flask Application</p>
