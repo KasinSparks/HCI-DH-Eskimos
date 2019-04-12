@@ -171,6 +171,7 @@ def submit_document():
 	docName = request.form['docName']
 	currDate = datetime.today()
 	docType = request.form['docType']
+	## put the date and time into the file name
 	fileName = secure_filename(docName + '_' + str(currDate))
 
 	customDateFormat = str(currDate.year) + '-' + str(currDate.month) + '-' + str(currDate.day)
@@ -191,9 +192,9 @@ def submit_document():
 		os.mkdir(os.path.join(current_app.config['UPLOAD_FOLDER'], str(id)))
 
 	## save image
-	## TODO: put the date and time into the file name
 	image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], str(id), fileName))
 
+	## TODO: add a notification to the worker that client uploaded a documnet
 
 	## redirect user back to upload page on success
 	return redirect(url_for('userViews.uploads'))
@@ -543,17 +544,15 @@ def update_deadlines():
 			e_name = request.form['e_name']
 			e_des = request.form['e_des']
 			e_date = request.form['e_date']
-			ec_r = int(request.form['ec_r'])
-			ec_g = int(request.form['ec_g'])
-			ec_b = int(request.form['ec_b'])
-
+			ec = request.form['ec']
+			
 			dateComponents = e_date.split('-')
 			e_year = int(dateComponents[0])
 			e_month = int(dateComponents[1])
 			e_day = int(dateComponents[2])
 
-			if check_for_vaild_args((e_name,e_date,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id)):
-				curr = db.getDB().execute('UPDATE Calendar SET Event_Name=?, Date=?, Event_Date_Day=?, Event_Date_Month=?, Event_Date_Year=?, Event_Description=?, Color_R=?, Color_G=?, Color_B=? WHERE User_UID=? AND UUID_Calendar=?', (e_name,e_date,e_day,e_month,e_year,e_des,ec_r,ec_g,ec_b,uid,e_id))
+			if check_for_vaild_args((e_name,e_date,e_day,e_month,e_year,e_des,ec,uid,e_id)):
+				curr = db.getDB().execute('UPDATE Calendar SET Event_Name=?, Date=?, Event_Date_Day=?, Event_Date_Month=?, Event_Date_Year=?, Event_Description=?, Color=? WHERE User_UID=? AND UUID_Calendar=?', (e_name,e_date,e_day,e_month,e_year,e_des,ec,uid,e_id))
 				db.getDB().commit()
 				curr.close()
 		else:

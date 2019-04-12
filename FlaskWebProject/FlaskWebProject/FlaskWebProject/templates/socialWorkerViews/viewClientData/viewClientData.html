@@ -111,7 +111,7 @@
             <!-- Only show the selected client's deadlines -->
             {% if event.User_UID == c %}
                 <button class="accordion">
-                    <span style="background-color: rgb({{ event.Color_R }},{{ event.Color_G }},{{ event.Color_B }}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
+                    <span style="background-color: {{ event.Color }}; height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
                     {{ event.Event_Name|e }}, {{ event.Event_Date_Month }} / {{ event.Event_Date_Day }} / {{ event.Event_Date_Year }}
                 </button>
                 <div class="clientInfo">
@@ -126,12 +126,8 @@
                         <input type="date" name="e_date" value="{{ event.Date }}" />
                         <br />
                         <h3>Dot Color</h3>
-                        <label for="ec_r">Red</label>
-                        <input type="number" name="ec_r" value="{{ event.Color_R }}" />
-                        <label for="ec_g">Green</label>
-                        <input type="number" name="ec_g" value="{{ event.Color_G }}" />
-                        <label for="ec_b">Blue</label>
-                        <input type="number" name="ec_b" value="{{ event.Color_B }}" />
+                        <label for="ec">Color</label>
+                        <input type="color" name="ec" value="{{ event.Color }}" />
 
                         <input type="number" name="e_id" value="{{ event.UUID_Calendar }}" hidden />
                         <input type="number" name="uid" value="{{ c }}" hidden />

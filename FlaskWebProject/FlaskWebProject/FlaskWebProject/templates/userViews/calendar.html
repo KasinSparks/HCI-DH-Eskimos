@@ -45,7 +45,7 @@
 											<div>
 												{% for deadline in deadlines %}
 													{% if deadline.Event_Date_Day == data %}
-														<span style="background-color: rgb({{deadline.Color_R}},{{deadline.Color_G}},{{deadline.Color_B}}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
+														<span style="background-color: {{deadline.Color}}; height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
 													{% endif %}
 												{% endfor %}
 											</div>
@@ -85,7 +85,7 @@
 					{% for deadline in deadlines %}
 						<tr>
 							<td>
-								<span style="margin: 0px 5px 0px 5px; background-color: rgb({{deadline.Color_R}},{{deadline.Color_G}},{{deadline.Color_B}}); height: 12px; width: 12px; border-radius: 50%; display: inline-block;"></span>
+								<span style="margin: 0px 5px 0px 5px; background-color: {{deadline.Color}}; height: 12px; width: 12px; border-radius: 50%; display: inline-block;"></span>
 							</td>
 							<td>{{ deadline.Event_Name|e }}</td>
 							<td style="text-align: center; border-left: 1px solid black;">
