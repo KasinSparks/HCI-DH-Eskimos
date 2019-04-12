@@ -16,7 +16,7 @@
 
         <div class="generalNav">
             <div class="navRow"><!--this is for mobile-->
-                <div class="navCol navItem"><a href="{{ url_for('userViews.profile') }}">PROFILE</a></div>
+                <div class="navCol navItem"><a href="{{ url_for('userViews.profile') }}">Profile</a></div>
                 {% if g.user['Social_Worker'] == 1 %}
                 <div class="navCol navItem"><a href="{{ url_for('userViews.notifications') }}">Notifications</a></div>
                 <div class="navCol navItem"><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></div>

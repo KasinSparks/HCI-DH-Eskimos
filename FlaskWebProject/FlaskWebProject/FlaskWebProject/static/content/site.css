@@ -1,14 +1,11 @@
-html{background-color: yellow;}
 
-body {
-    padding-bottom: 20px;
-}
 
-/* Set padding to keep content from hitting the edges */
+
+/* Set padding to keep content from hitting the edges 
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
+}*/
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -40,4 +37,35 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+
+/********** QUYEN: DESKTOP **********/
+
+.row button {
+    display: block;
+    width: 100%;
+}
+
+/*either show or hide by default*/
+.clientInfo{
+    display: none;
+}
+
+.col1 { /*client info*/
+    width: 60%;
+    float: left;
+    display: inline-block;
+}
+.col2 { /*dhs info*/
+    width: 39%;
+    float: left;
+    display: inline-block
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }

@@ -1,21 +1,25 @@
 ﻿{% extends 'layout.html' %}
 
-	{% block content %}
-<div class="content_container">
+{% block content %}
+<h1>Your Profile</h1>
 
-    <!--current user's data-->
+<!--current user's data-->
+<div class="row">
+
+<div class="client col1">
     <button class="accordion">{{ clientData.Last_Name|e }}, {{ clientData.First_Name|e }}</button>
     <div class="clientInfo">
         <ul>
             <li>First Name: {{ clientData.First_Name|e }}</li>
             <li>Last Name: {{ clientData.Last_Name|e }}</li>
             <li>Date of Birth: {{ clientData.DOB }}</li>
-            <li>Date of Birth: {{ clientData.Address|e }}</li>
+            <li>Address: {{ clientData.Address|e }}</li>
         </ul>
     </div>
 
-    <!--use for a guide on how to do the accordion-->
-    <!--https://www.w3schools.com/howto/howto_js_accordion.asp-->
+<!--use for a guide on how to do the accordion-->
+<!--https://www.w3schools.com/howto/howto_js_accordion.asp-->
+
     {% for user in connectedCases %}
     <button class="accordion">{{ user.Last_Name|e }}, {{ user.First_Name|e }}</button>
     <div class="clientInfo">
@@ -23,11 +27,13 @@
             <li>First Name: {{ user.First_Name|e }}</li>
             <li>Last Name: {{ user.Last_Name|e }}</li>
             <li>Date of Birth: {{ user.DOB }}</li>
-            <li>Date of Birth: {{ user.Address|e }}</li>
+            <li>Address: {{ user.Address|e }}</li>
         </ul>
     </div>
     {% endfor %}
+</div>
 
+<div class="office col2">
     <!--social worker's data-->
     <button class="accordion">Your Social Worker</button>
     <div class="clientInfo">
@@ -47,6 +53,16 @@
             <li>Phone: {{ countyOffice.Phone|e}}</li>
         </ul>
     </div>
-
 </div>
-{% endblock content %}
+
+</div><!--ENDOF ROW DIV-->
+
+<div class="update">
+    <p>Is any of this information incorrect?</p>
+    <button class="request">Request an Update</button>
+    <div class="update-modal">
+        <p>User will enter their email</p>
+    </div>
+</div>
+
+    {% endblock content %}
