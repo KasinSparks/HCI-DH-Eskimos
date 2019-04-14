@@ -98,7 +98,10 @@ def profile():
 def uploads():
 
 	## get the user's previous uploads
-	queryStr = 'SELECT * FROM Uploads WHERE Client_UID=?'
+	queryStr = """SELECT Uploads.*, Document_Type.Document_Type_Name 
+					FROM Uploads 
+					INNER JOIN Document_Type ON Uploads.Document_Type=Document_Type.UID_Document_Type
+					WHERE Client_UID=?;"""
 	uploadList = query_db(queryStr, (g.user['UID_Users'],))
 
 	return render_template(
@@ -180,7 +183,6 @@ def submit_document():
 	## submit the data to the database
 	from FlaskWebProject.db import getDB
 	command = 'INSERT INTO Uploads (Client_UID, Date_Uploaded, Document_Type, File_Name, Doc_Name) VALUES (?,?,?,?,?);'
-	### TODO: change the doctype from 0 to a value the user picks
 	curr = getDB().execute(command, (g.user['UID_Users'], customDateFormat, docType, fileName, docName,))
 	getDB().commit()
 	curr.close()
@@ -194,7 +196,16 @@ def submit_document():
 	## save image
 	image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], str(id), fileName))
 
-	## TODO: add a notification to the worker that client uploaded a documnet
+	## get the user's social worker
+	sqlQry = 'SELECT Social_Worker_UID FROM Client WHERE UID_Client=?'
+	swUID = query_db(sqlQry, (g.user['UID_Users'],), True)
+	swUID = int(swUID['Social_Worker_UID'])
+
+	## add a notification to the worker that client uploaded a documnet
+	sqlCommand = 'INSERT INTO Notifications (UID_Client, UID_Social_Worker, Notification_Type, Has_Been_Read) VALUES (?,?,?,?);'
+	curr = getDB().execute(sqlCommand, (g.user['UID_Users'], swUID, 2, 0))
+	getDB().commit()
+	curr.close()
 
 	## redirect user back to upload page on success
 	return redirect(url_for('userViews.uploads'))
@@ -277,7 +288,12 @@ def calendar():
 def notifications():
 	if g.user['social_worker'] == 1:
 		## get the current social worker's notifictations
-		notifQry = 'SELECT * FROM Notifications WHERE UID_Social_Worker=? ORDER BY Has_Been_Read ASC;'
+		notifQry = """SELECT Notifications.*, Notification_Type.Name, Client.First_Name, Client.Last_Name 
+				FROM Notifications 
+				INNER JOIN Notification_Type ON Notifications.Notification_Type=Notification_Type.UID_Notification_Type 
+				INNER JOIN Client ON Notifications.UID_Client=Client.UID_Client
+				WHERE UID_Social_Worker=? 
+				ORDER BY Has_Been_Read ASC;"""
 		queryResult = query_db(notifQry, (int(g.user['UID_Users']),))
 
 		return render_template(
@@ -311,7 +327,11 @@ def notifications_open():
 		notifQueryResult = query_db(notifQry, (int(uid_Notification),), True)
 
 		## get the client data from the notification
-		clientQry = 'SELECT * FROM Client WHERE UID_Client=?'
+		clientQry = """SELECT Client.*, Case_Status.Case_Status_Name, County_Office.Office_Name 
+				FROM Client 
+				INNER JOIN Case_Status ON Client.Case_Status=Case_Status.UID_Case_Status
+				INNER JOIN County_Office ON Client.County_Office_UID=County_Office.UID_County_Office
+				WHERE UID_Client=?"""
 		clientQueryResult = query_db(clientQry, (int(notifQueryResult['UID_Client']),), True)
 
 		## get the user status
@@ -371,7 +391,11 @@ def my_clients():
 	if g.user['social_worker'] == 1:
 
 		## get a query of all the social worker's current clients
-		clientQryStr = 'SELECT * FROM Client WHERE Social_Worker_UID=?'
+		clientQryStr = """SELECT Client.*, Case_Type.Case_Type_Name, Case_Status.Case_Status_Name 
+					FROM Client 
+					INNER JOIN Case_Status ON Client.Case_Status=Case_Status.UID_Case_Status
+					INNER JOIN Case_Type ON Client.Case_Type_UID=Case_Type.UID_Case_Type 
+					WHERE Social_Worker_UID=?"""
 		clientQryRlt = query_db(clientQryStr, (g.user['UID_Users'],))
 
 		return render_template(
@@ -476,7 +500,10 @@ def documents():
 			queryStr = 'SELECT UID_Users FROM Users WHERE User_Name=?'
 			uid = int(query_db(queryStr, (clientEmail,), True)['UID_Users'])
 
-		queryStr = 'SELECT * FROM Uploads WHERE Client_UID=?'
+		queryStr = """SELECT Uploads.*, Document_Type.Document_Type_Name 
+					FROM Uploads 
+					INNER JOIN Document_Type ON Uploads.Document_Type=Document_Type.UID_Document_Type
+					WHERE Client_UID=?;"""
 		qryResult = query_db(queryStr, (uid,))
 
 		return render_template(

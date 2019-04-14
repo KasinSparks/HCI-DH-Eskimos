@@ -3,19 +3,25 @@
 {% block content %}
     <table>
         <tr>
-            <th>UID Client</th>
+            <th>Client First Name</th>
+			<th>Client Last Name</th>
             <th>Notification Type</th>
             <th>Has Been Read</th>
         </tr>
         {% for n in notifications %}
-            <tr>
-                <td>{{ n.UID_Client }}</td>
-                <td>{{ n.Notification_Type }}</td>
-                <td>{{ n.Has_Been_Read }}</td>
-                <td>
-                    <button onclick="window.location += '/open?n=' + {{ n.UID_Notification }}">Open</button>
-                </td>
-            </tr>
+			<tr>
+				<td>{{ n.First_Name|e }}</td>
+				<td>{{ n.Last_Name|e }}</td>
+				<td>{{ n.Name|e }}</td>
+				{% if n.Has_Been_Read == 0 %}
+					<td><span style="background-color: #4286f4; height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span></td>
+				{% else %}
+					<td></td>
+				{% endif %}
+				<td>
+					<button onclick="window.location += '/open?n=' + {{ n.UID_Notification }}">Open</button>
+				</td>
+			</tr>
         {% endfor %}
     </table>
 {% endblock content %}
