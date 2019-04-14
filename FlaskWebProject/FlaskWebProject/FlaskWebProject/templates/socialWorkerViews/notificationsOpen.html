@@ -1,21 +1,6 @@
 ﻿{% extends 'layout.html' %}
 
 {% block content %}
-    <table style="border-collapse: collapse;">
-        <tr>
-            <th>UID Client</th>
-            <th>Notification Type</th>
-            <th>Has Been Read</th>
-        </tr>
-        <tr>
-            <td style="border:solid 1px black">{{ notification.UID_Client }}</td>
-            <td style="border:solid 1px black">{{ notification.Notification_Type }}</td>
-            <td style="border:solid 1px black">{{ notification.Has_Been_Read }}</td>
-        </tr>
-    </table>
-
-    <br />
-    <br />
     {% if notification.Notification_Type == 1 %}
         {% if verified.Is_Verified == 0 %}
             <form action="../account/confirm" method="post">
@@ -29,11 +14,14 @@
                 <input type="date" name="dob" value="{{ clientData.DOB }}"/>
                 <br />
                 <label for="address">Address</label>
-                <input type="text" name="address" value="{{ clientData.Address }}"/>
+                <input type="text" name="address" value="{{ clientData.Address|e }}"/>
                 <br />
                 <label for="case_status">Case Status</label>
                 <input type="text" name="case_status" value="{{ clientData.Case_Status }}"/>
                 <br />
+				<label for="case_type">Case Type</label>
+				<input type="number" name="case_type" value="{{ clientData.Case_Type }}"/>
+				<br />
                 <label for="case_num">Case Number</label>
                 <input type="number" name="case_num" value="{{ clientData.Case_Number }}"/>
                 <br />
@@ -63,9 +51,9 @@
                     <td style="border:solid 1px black">{{ clientData.Last_Name|e }}</td>
                     <td style="border:solid 1px black">{{ clientData.DOB }}</td>
                     <td style="border:solid 1px black">{{ clientData.Address }}</td>
-                    <td style="border:solid 1px black">{{ clientData.Case_Status }}</td>
+                    <td style="border:solid 1px black">{{ clientData.Case_Status_Name|e }}</td>
                     <td style="border:solid 1px black">{{ clientData.Case_Number }}</td>
-                    <td style="border:solid 1px black">{{ clientData.County_Office_UID }}</td>
+                    <td style="border:solid 1px black">{{ clientData.Office_Name|e }}</td>
                     <td style="border:solid 1px black">{{ verified.Is_Verified }}</td>
                 </tr>
             </table>
