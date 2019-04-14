@@ -338,13 +338,28 @@ def notifications_open():
 		userQry = 'SELECT Is_Verified FROM Users WHERE UID_Users=?'
 		userQueryResult = query_db(userQry, (int(clientQueryResult['UID_Client']),), True)
 
+		## get the case status names for form
+		qryStr = 'SELECT * FROM Case_Status;'
+		case_status = query_db(qryStr)
+
+		## get the case types names for form
+		qryStr = 'SELECT * FROM Case_Type;'
+		case_types = query_db(qryStr)
+
+		## get the county office names for form
+		qryStr = 'SELECT * FROM County_Office;'
+		co = query_db(qryStr)
+
 		return render_template(
 			'socialWorkerViews/notificationsOpen.html',
 			notification=notifQueryResult,
 			clientData=clientQueryResult,
 			verified=userQueryResult,
 			year=datetime.now().year,
-			title='Notifications Viewer'
+			title='Notifications Viewer',
+			status=case_status,
+			caseTypes=case_types,
+			offices=co
 			)
 	else:
 		## current person logged in is not a social worker
@@ -361,8 +376,9 @@ def confirm_account():
 		fn = request.form['fn']
 		ln = request.form['ln']
 		dob = request.form['dob']
-		cs = request.form['case_status']
-		cn = request.form['case_num']
+		cs = int(request.form['case_status'])
+		ct = int(request.form['case_type'])
+		cn = int(request.form['case_num'])
 		of = request.form['office']
 		ad = request.form['address']
 
@@ -374,7 +390,7 @@ def confirm_account():
 		cur.close()
 
 		cur = getDB().execute('UPDATE Client SET First_Name=?, Last_Name=?, DOB=?, Address=?,' +
-			'Case_Status=?, Case_Number=?, County_Office_UID=? WHERE UID_Client=?;', (fn, ln, dob, ad, cs, cn, of, uid))
+			'Case_Status=?, Case_Type_UID=?, Case_Number=?, County_Office_UID=? WHERE UID_Client=?;', (fn, ln, dob, ad, cs, ct, cn, of, uid))
 		getDB().commit()
 		cur.close()
 
@@ -393,9 +409,10 @@ def my_clients():
 		## get a query of all the social worker's current clients
 		clientQryStr = """SELECT Client.*, Case_Type.Case_Type_Name, Case_Status.Case_Status_Name 
 					FROM Client 
+					INNER JOIN Users ON Client.UID_Client=Users.UID_Users
 					INNER JOIN Case_Status ON Client.Case_Status=Case_Status.UID_Case_Status
 					INNER JOIN Case_Type ON Client.Case_Type_UID=Case_Type.UID_Case_Type 
-					WHERE Social_Worker_UID=?"""
+					WHERE Social_Worker_UID=? AND Is_Verified=1"""
 		clientQryRlt = query_db(clientQryStr, (g.user['UID_Users'],))
 
 		return render_template(
@@ -470,6 +487,14 @@ def client_info():
 		queryStr = 'SELECT * FROM County_Office'
 		countyOfficeList = query_db(queryStr)
 
+		## get all of the case status
+		queryStr = 'SELECT * FROM Case_Type'
+		caseTypes = query_db(queryStr)
+
+		## get all of the case types
+		queryStr = 'SELECT * FROM Case_Status'
+		status = query_db(queryStr)
+
 		return render_template(
 			'socialWorkerViews/viewClientData/viewClientData.html',
 			title='My Clients',
@@ -479,7 +504,9 @@ def client_info():
 			officeList=countyOfficeList,
 			year=datetime.now().year,
 			templateNum=0,
-			c=uid
+			c=uid,
+			status=status,
+			caseTypes=caseTypes
 			)
 
 	else:
@@ -595,6 +622,43 @@ def update_deadlines():
 		redirect(url_for('auth.login'))
 
 
+@bp.route('/myClients/add/deadline', methods=('GET', 'POST'))
+@login_required
+def add_deadline():
+	if g.user['social_worker'] == 1:
+		## TODO: put this block into a function.... It is repeated like 5 times in this doc.
+		if request.method == 'POST':
+			uid = int(request.form['uid'])
+			e_name = request.form['e_name']
+			e_des = request.form['e_des']
+			e_date = request.form['e_date']
+			ec = request.form['ec']
+			
+			dateComponents = e_date.split('-')
+			e_year = int(dateComponents[0])
+			e_month = int(dateComponents[1])
+			e_day = int(dateComponents[2])
+
+			if check_for_vaild_args((e_name,e_date,e_day,e_month,e_year,e_des,ec,uid)):
+				curr = db.getDB().execute("""INSERT INTO Calendar 
+						(User_UID, Event_Name, Date, Event_Date_Day, Event_Date_Month, Event_Date_Year, 
+						Event_Description, Color) 
+						VALUES (?,?,?,?,?,?,?,?)""", (uid,e_name,e_date,e_day,e_month,e_year,e_des,ec))
+				db.getDB().commit()
+				curr.close()
+		else:
+			clientEmail = request.args.get('ce')
+			print('No uid in POST request... Redirecting...')
+			return redirect(url_for('userViews.client_info', ce=clientEmail))
+
+		queryStr = 'SELECT User_Name FROM Users WHERE UID_Users=?'
+		c_email = query_db(queryStr, (uid,), True)
+		return redirect(url_for('userViews.deadlines', ce=c_email['User_Name']))
+	else:
+		## current person logged in is not a social worker
+		redirect(url_for('auth.login'))
+
+
 
 @bp.route('/myClients/update/clientData', methods=('GET', 'POST'))
 @login_required
@@ -604,6 +668,10 @@ def update_clientData():
 		ln = request.form['ln']
 		dob = request.form['dob']
 		ad = request.form['address']
+		cs = int(request.form['case_status'])
+		ct = int(request.form['case_type'])
+		cn = int(request.form['case_num'])
+		co = int(request.form['office'])
 
 
 		if request.method == 'POST':
@@ -615,7 +683,10 @@ def update_clientData():
 			uid = int(query_db(queryStr, (clientEmail,), True)['UID_Users'])
 
 		if check_for_vaild_args((fn,ln,dob,ad,uid)):
-			curr = db.getDB().execute('UPDATE Client SET First_Name=?, Last_Name=?, DOB=?, Address=? WHERE UID_Client=?', (fn,ln,dob,ad,uid))
+			curr = db.getDB().execute("""UPDATE Client 
+					SET First_Name=?, Last_Name=?, DOB=?, Address=?, Case_Status=?, Case_Type_UID=?, County_Office_UID=?, County_Office_UID=? 
+					WHERE UID_Client=?;"""
+					, (fn,ln,dob,ad,cs,ct,cn,co,uid))
 			db.getDB().commit()
 			curr.close()
 
@@ -661,3 +732,9 @@ def update_clientOfficeData():
 	else:
 		## current person logged in is not a social worker
 		redirect(url_for('auth.login'))
+
+@bp.route('/notImplemented')
+def notImplemented():
+	return render_template('notImplemented.html',
+			year=datetime.now().year,
+			title='Not Implemented');

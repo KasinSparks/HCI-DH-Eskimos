@@ -17,16 +17,40 @@
                 <input type="text" name="address" value="{{ clientData.Address|e }}"/>
                 <br />
                 <label for="case_status">Case Status</label>
-                <input type="text" name="case_status" value="{{ clientData.Case_Status }}"/>
+                    <select name="case_status">
+                        {% for s in status %}
+                            {% if s.UID_Case_Status == clientData.Case_Status %}
+                                <option value="{{ s.UID_Case_Status }}" selected>{{ s.Case_Status_Name|e }}</option>
+                            {% else %}
+                                <option value="{{ s.UID_Case_Status }}">{{ s.Case_Status_Name|e }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                 <br />
 				<label for="case_type">Case Type</label>
-				<input type="number" name="case_type" value="{{ clientData.Case_Type }}"/>
+                    <select name="case_type">
+                            {% for t in caseTypes %}
+                                {% if t.UID_Case_Type == clientData.Case_Type_UID %}
+                                    <option value="{{ t.UID_Case_Type }}" selected>{{ t.Case_Type_Name|e }}</option>
+                                {% else %}
+                                    <option value="{{ t.UID_Case_Type }}">{{ t.Case_Type_Name|e }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
 				<br />
                 <label for="case_num">Case Number</label>
                 <input type="number" name="case_num" value="{{ clientData.Case_Number }}"/>
                 <br />
                 <label for="office">County Office UID</label>
-                <input type="text" name="office" value="{{ clientData.County_Office_UID }}"/>
+                    <select name="office">
+                        {% for o in offices %}
+                            {% if o.UID_County_Office == clientData.County_Office_UID %}
+                                <option value="{{ o.UID_County_Office }}" selected>{{ o.Office_Name|e }}</option>
+                            {% else %}
+                                <option value="{{ o.UID_County_Office }}">{{ o.Office_Name|e }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                 <br />
                 <label for="verified">Has been Verified</label>
                 <input type="number" name="verified" disabled value="{{ verified.Is_Verified }}"/>
