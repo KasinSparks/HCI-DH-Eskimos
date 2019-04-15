@@ -1,6 +1,12 @@
 ﻿{% extends "layout.html" %}
 
 {% block content %}
+<div class="page-header">
+    <h>Image Uploading Center</h>
+    <hr />
+</div>
+
+    <div class="tablecol">
 	<table>
 		<!--Table Headers-->
 		<tr>
@@ -28,6 +34,9 @@
 			</tr>
 		{% endfor %}
 	</table>
+    </div>
 
-	<a href="/uploads/upload_document">Upload a new document</a>
+    <div class="uploadcol">
+	    <a href="/uploads/upload_document">Upload a new document</a>
+    </div>
 {% endblock content %}
