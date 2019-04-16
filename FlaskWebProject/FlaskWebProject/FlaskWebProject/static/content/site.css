@@ -1,3 +1,6 @@
+html{
+    text-align: center;
+}
 body {
     font-family: 'Lato', sans-serif;
 }
@@ -68,7 +71,7 @@ input[type="checkbox"].input-validation-error {
     height: 50px;
 }
 
-.calendar-header {
+.page-header { /*Quyen: this is going to be used to style title for every pages*/
     text-align: center;
     font-size: 30px;
 }
@@ -109,3 +112,71 @@ input[type="checkbox"].input-validation-error {
     height: 29px;
     text-align: center;
 }
+
+
+
+/********** QUYEN: DESKTOP **********/
+/******** Profile ********/
+.row button {
+    display: block;
+    width: 100%;
+}
+
+/*either show or hide by default*/
+.clientInfo {
+    /*display: none;*/
+    height: 25%;
+
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.col1 { /*client info*/
+    width: 59%;
+    float: left;
+}
+
+.col2 { /*dhs info*/
+    width: 38%;
+    float: left;
+    padding-left: 2%;
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.update{
+    text-align: center;
+}
+
+/******* image uploading center *******/
+.tablecol { /*table of uploaded document*/
+    width: 65%;
+    float: left;
+    padding-left: 1%;
+}
+.uploadcol { /*upload new document*/
+    width: 34%;
+    float: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 5px;
+}
+table, th, td{
+    border: 1px solid black;
+}
+td{text-align: center;}
+
+.uploadcol a{
+   text-decoration: none;
+   padding: 5px 10px 5px 10px;
+   border: 1px solid black;
+}
+

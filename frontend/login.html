@@ -5,9 +5,9 @@
         <title>Oklahoma Department of Human Services</title>
 
         <!--viewport metas go here-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="base.css">
+        <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="styles.css">
     </head>
 
@@ -18,23 +18,34 @@
     	</header>
 
     	<article>
-    		<section class="isClient">
+    		<section>
+    		<div class="isClient">
     			<h1>DHS Client Sign In</h1>
+    			
+    			<div class="form_container">
     			<form>
-    				<label for="uname">User Name</label>
-    				<input type="text" name="uname" placeholder="Enter your email" required><br>
+    				<div class="row">
+    					<label class="col1" for="uname">User Name</label>
+    					<input class="col2" type="text" name="uname" align="right" placeholder="Enter your email" required><br>
+    				</div>
 
-    				<label for="psw">Password</label>
-    				<input type="text" name="psw" placeholder="Enter your password" required><br>
+    				<div class="row">
+    					<label class="col1" for="psw">Password</label>
+    					<input class="col2" type="text" name="psw" align="right" placeholder="Enter your password" required><br>
+    				</div>
 
-    				<button type="submit">Login</button><br>
-    				<button type="button">Make An Account</button><br>
+    				<div class="row"><button type="submit">Login</button><br></div>
+    				<div class="row"><button type="button">Make An Account</button><br></div>
 
     				<a href="">Forgot your password?</a>
     			</form>
+    			</div>
+
+    		</div>
     		</section>
 
-    		<section class="isntClient">
+    		<section>
+    		<div  class="isntClient">
     			<button id="modalButton">Not a DHS Client?</button><!--need script to work properly-->
     			<!--The Modal-->
     			<div id="helpModal" class="modContent">
@@ -44,6 +55,7 @@
     			</div> 
 
     			<a href="help2.html">Learn More</a>
+    		</div>
     		</section>
     	</article>
     </body>
