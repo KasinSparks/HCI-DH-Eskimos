@@ -5,7 +5,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-/* ---------- Layout Page ---------- */
+/* ------------------  MICHAEL: Layout Page ---------------- */
 .content-container {
     display: flex;
     justify-content: center;
@@ -61,7 +61,127 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-/* ---------- Calendar CSS ---------- */
+
+
+
+/*******************************************************************************************/
+/*************************************** QUYEN: DESKTOP ************************************/
+/*******************************************************************************************/
+
+/************************** login.html ***************************/
+/*client column & everything inside it*/
+.clientcol{ 
+    width: 60%;
+    float: left;
+    border-right: 1px solid black;
+}
+
+.labelcol{ 
+    width: 30%;
+    float: left;
+    text-align: left;
+}
+.inputcol { 
+    width: 70%;
+    float: left;
+}
+.labelcol label {
+    text-align: left;
+    display: inline-block;
+    padding: 12px 12px 12px 2px;
+}
+.inputcol input[type=text] {
+    display: inline-block;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid black;
+}
+
+/*not client column & everything inside it*/
+.notclientcol {
+    width: 39%;
+    float:left;
+}
+form .toClick{
+    width: 50%;
+    margin: auto;
+}
+.row{
+    padding-bottom: 5px;
+}
+
+
+/********************** createProfile.html *********************/
+form{
+    margin: auto;
+}
+.col-label{
+    width: 30%;
+    float: left;
+    text-align: left;
+    padding: 10px 0 10px 5%;
+}
+    label.col-label{
+        font-size: large;
+        max-width: 50%;
+    }
+
+.col-input {
+    width: 60%;
+    float: left;
+    padding: 10px;
+}
+    input.col-input, select.col-input {
+        max-width: 80%;
+        border: 1px solid black;
+    }
+
+input[type=submit]{
+    width: 15%;
+    padding: 5px 0 5px 0;
+}
+
+
+/************************ profile.html ************************/
+.row button {
+    display: block;
+    width: 100%;
+}
+
+.accordion{
+    padding: 5px 0 5px 0;
+}
+
+.clientInfo {
+    height: 25%;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    text-align: left;
+}
+
+.col1 { /*client info*/
+    width: 59%;
+    float: left;
+}
+
+.col2 { /*dhs info*/
+    width: 38%;
+    float: left;
+    padding-left: 2%;
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.update{
+    text-align: center;
+}
+
+/* -------------------- MICHAEL: calendar.html ------------------ */
 
 .deadline-container tr:nth-child(odd) {
     background-color: #efefef;
@@ -71,7 +191,8 @@ input[type="checkbox"].input-validation-error {
     height: 50px;
 }
 
-.page-header { /*Quyen: this is going to be used to style title for every pages*/
+/*Quyen: this is going to be used to style title for every pages*/
+.page-header { 
     text-align: center;
     font-size: 30px;
 }
@@ -114,46 +235,7 @@ input[type="checkbox"].input-validation-error {
 }
 
 
-
-/********** QUYEN: DESKTOP **********/
-/******** Profile ********/
-.row button {
-    display: block;
-    width: 100%;
-}
-
-/*either show or hide by default*/
-.clientInfo {
-    /*display: none;*/
-    height: 25%;
-
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-}
-
-.col1 { /*client info*/
-    width: 59%;
-    float: left;
-}
-
-.col2 { /*dhs info*/
-    width: 38%;
-    float: left;
-    padding-left: 2%;
-}
-
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.update{
-    text-align: center;
-}
-
-/******* image uploading center *******/
+/*************************** uploads.html *************************/
 .tablecol { /*table of uploaded document*/
     width: 65%;
     float: left;
