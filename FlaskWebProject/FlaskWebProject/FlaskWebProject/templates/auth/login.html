@@ -1,16 +1,33 @@
 ﻿{% extends 'layout.html' %}
 
-{% block content %}
+{% block content %} 
+<div class="page-header">
+    <h>DHS Client Sign In</h>
+    <hr />
+</div>
 
+<div class="clientcol">
     <!-- ensure the / is infront of path to advoid error -->
-	<form action="/auth/login" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" />
-        <label for="password">Password:</label>
-		<input type="password" name="password" />
-		<input type="submit" name="login" value="Login"/>
-	</form>
+    <form action="/auth/login" method="post">
+        <div class="row">
+            <label class="labelcol" for="username">Username:</label>
+            <input class="inputcol" type="text" name="username" />
+        </div>
 
+        <div class="row">
+            <label class="labelcol" for="password">Password:</label>
+            <input class="inputcol" type="password" name="password" />
+        </div>
 
-    <button><a href="/auth/create">Make an Account</a></button>
+        <div class="row toClick"><input type="submit" name="login" value="Login" /></div>
+        <div class="row toClick"><button><a href="/auth/create">Make an Account</a></button></div>
+    </form>
+</div>
+
+<div class="notclientcol">
+    <div class="row toClick"><a href="">Not a DHS Client?</a></div>
+    <div class="row toClick"><a href="">Learn More</a></div>
+</div>
+
+    
 {% endblock content %}
