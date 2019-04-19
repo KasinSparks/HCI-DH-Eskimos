@@ -13,7 +13,7 @@
 <body>
 
     <!-- Logo -->
-    <div style="position: absolute; top: 13px; left: 70px;">
+    <div class="dhslogo" style="position: absolute; top: 13px; left: 70px;">
         <img style="width: 60%;" src="/static/img/logo.png">
     </div>
 
@@ -30,20 +30,20 @@
         <div class="navbar">
             <ul>
 
-            <li><a href="{{ url_for('userViews.profile') }}">Profile</a></li>
-            {% if g.user['Social_Worker'] == 1 %}
-            <br />
-            <li><a href="{{ url_for('userViews.notifications') }}">Notifications</a></li>
-            <br />
-            <li><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></li>
-            {% else %}
-            <br />
-            <li><a href="{{ url_for('userViews.uploads') }}">Uploads</a></li>
-            <br />
-            <li><a href="{{ url_for('userViews.calendar') }}">Calendar</a></li>
-            {% endif %}
-            <br />
-            <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+                <li><a href="{{ url_for('userViews.profile') }}">Profile</a></li>
+                {% if g.user['Social_Worker'] == 1 %}
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.notifications') }}">Notifications</a></li>
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></li>
+                {% else %}
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.uploads') }}">Uploads</a></li>
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.calendar') }}">Calendar</a></li>
+                {% endif %}
+                <!--br /-->
+                <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
 
             </ul>
         </div>
