@@ -3,17 +3,28 @@
 {% block content %}
 	<img src="{{ defaultImg }}" , id="imagePrev" />
 
-	<form enctype=multipart/form-data action="/uploads/submit_document" method="POST">
-		<input type="file" accept="image/*" name="image" id="image" onchange="document.getElementById('imagePrev').src = window.URL.createObjectURL(this.files[0])">
-		<label for="docName">Name of Document</label>
-		<input name="docName" type="text" />
-		<label for="docType">Document Type</label>
-		<select name="docType">
-			{% for data in typeData %}
-				<option value="{{ data.UID_Document_Type }}">{{ data.Document_Type_Name }}</option>
-			{% endfor %}
-		</select>
-		<input type="submit">
-		<!--<input type="submit" value="Submit">-->
-	</form>
+    <form enctype=multipart/form-data action="/uploads/submit_document" method="POST">
+        <div class="row">
+            <input type="file" accept="image/*" name="image" id="image" onchange="document.getElementById('imagePrev').src = window.URL.createObjectURL(this.files[0])">
+        </div>
+        <br />
+        <br />
+
+        <div class="row">
+            <label class="col-label" for="docName">Name of Document</label>
+            <input class="col-input" name="docName" type="text" />
+        </div>
+
+        <div class="row">
+            <label class="col-label" for="docType">Document Type</label>
+            <select class="col-input" name="docType">
+                {% for data in typeData %}
+                <option value="{{ data.UID_Document_Type }}">{{ data.Document_Type_Name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="row"><input type="submit"></div>
+        <!--<input type="submit" value="Submit">-->
+    </form>
 {% endblock content %}
