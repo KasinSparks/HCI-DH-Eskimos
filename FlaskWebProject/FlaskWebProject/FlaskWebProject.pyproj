@@ -86,7 +86,6 @@
     <Content Include="FlaskWebProject\templates\loginSuccessTest.html" />
     <Content Include="FlaskWebProject\templates\auth\login.html" />
     <Content Include="FlaskWebProject\templates\test.html" />
-    <Content Include="FlaskWebProject\templates\userViews\index.html" />
     <Content Include="FlaskWebProject\templates\userViews\profile.html" />
     <Content Include="FlaskWebProject\templates\userViews\imageViewer.html" />
     <Content Include="FlaskWebProject\templates\userViews\uploadDocument.html" />
@@ -114,7 +113,7 @@
     <Content Include="FlaskWebProject\static\scripts\respond.js" />
     <Content Include="FlaskWebProject\static\scripts\respond.min.js" />
     <Content Include="FlaskWebProject\static\scripts\_references.js" />
-    <Content Include="FlaskWebProject\templates\about.html" />
+    <Content Include="FlaskWebProject\templates\notImplemented.html" />
     <Content Include="FlaskWebProject\templates\contact.html" />
     <Content Include="FlaskWebProject\templates\index.html" />
     <Content Include="FlaskWebProject\templates\layout.html" />

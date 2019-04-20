@@ -22,46 +22,36 @@
                 <br />
                 <label for="address">Address</label>
                 <input type="text" name="address" value="{{ clientData.Address|e }}" />
-                <input type="number" name="uid" value="{{ clientData.UID_Client }}" hidden />
-                <button name="submit" type="submit">Update Info</button>
-            </form>
-        </div>
-        <!--use for a guide on how to do the accordion-->
-        <!--https://www.w3schools.com/howto/howto_js_accordion.asp-->
-	 {% for user in connectedCases %}
-        <button class="accordion">{{ user.Last_Name|e }}, {{ user.First_Name|e }}</button>
-        <div class="clientInfo">
-            <form action="{{ url_for('userViews.update_clientData') }}" method="post">
-                <label for="fn">First Name</label>
-                <input type="text" name="fn" value="{{ user.First_Name|e }}" />
                 <br />
-                <label for="ln">Last Name</label>
-                <input type="text" name="ln" value="{{ user.Last_Name|e }}" />
+                <label for="case_status">Case Status</label>
+                <select name="case_status">
+                    {% for s in status %}
+                    {% if s.UID_Case_Status == clientData.Case_Status %}
+                    <option value="{{ s.UID_Case_Status }}" selected>{{ s.Case_Status_Name|e }}</option>
+                    {% else %}
+                    <option value="{{ s.UID_Case_Status }}">{{ s.Case_Status_Name|e }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
                 <br />
-                <label for="dob">Date of Birth</label>
-                <input type="date" name="dob" value="{{ user.DOB }}" />
+                <label for="case_type">Case Type</label>
+                <select name="case_type">
+                    {% for t in caseTypes %}
+                    {% if t.UID_Case_Type == clientData.Case_Type_UID %}
+                    <option value="{{ t.UID_Case_Type }}" selected>{{ t.Case_Type_Name|e }}</option>
+                    {% else %}
+                    <option value="{{ t.UID_Case_Type }}">{{ t.Case_Type_Name|e }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
                 <br />
-                <label for="address">Address</label>
-                <input type="text" name="address" value="{{ user.Address|e }}" />
-                <input type="number" name="uid" value="{{ user.UID_Client }}" hidden />
-                <button name="submit" type="submit">Update Info</button>
-            </form>
-        </div>
-	 {% endfor %}
-
-        <br />
-        <a href="">Add a New Connected Case</a>
-        <br />
-        <br />
-
-        <!--user's current county office data-->
-        <button class="accordion">Your County Office</button>
-        <div class="clientInfo">
-            <form action="/myClients/update/officeData" method="post">
-                <label for="office">Office Name</label>
+                <label for="case_num">Case Number</label>
+                <input type="number" name="case_num" value="{{ clientData.Case_Number }}" />
+                <br />
+                <label for="office">County Office UID</label>
                 <select name="office">
                     {% for o in officeList %}
-                    {% if o.UID_County_Office == countyOffice.UID_County_Office %}
+                    {% if o.UID_County_Office == clientData.County_Office_UID %}
                     <option value="{{ o.UID_County_Office }}" selected>{{ o.Office_Name|e }}</option>
                     {% else %}
                     <option value="{{ o.UID_County_Office }}">{{ o.Office_Name|e }}</option>
@@ -69,15 +59,72 @@
                     {% endfor %}
                 </select>
                 <br />
-                <label for="address">Address</label>
-                <input type="text" name="address" value="{{ countyOffice.Address|e }}" disabled />
-                <br />
-                <label for="phone">Phone</label>
-                <input type="tel" name="phone" value="{{ countyOffice.Phone|e }}" disabled />
-                <input type="number" name="uid" value="{{ c }}" hidden />
+                <input type="number" name="uid" value="{{ clientData.UID_Client }}" hidden />
                 <button name="submit" type="submit">Update Info</button>
             </form>
         </div>
+        <!--use for a guide on how to do the accordion-->
+        <!--https://www.w3schools.com/howto/howto_js_accordion.asp-->
+	     {% for user in connectedCases %}
+            <button class="accordion">{{ user.Last_Name|e }}, {{ user.First_Name|e }}</button>
+            <div class="clientInfo">
+                <form action="{{ url_for('userViews.update_clientData') }}" method="post">
+                    <label for="fn">First Name</label>
+                    <input type="text" name="fn" value="{{ user.First_Name|e }}" />
+                    <br />
+                    <label for="ln">Last Name</label>
+                    <input type="text" name="ln" value="{{ user.Last_Name|e }}" />
+                    <br />
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" value="{{ user.DOB }}" />
+                    <br />
+                    <label for="address">Address</label>
+                    <input type="text" name="address" value="{{ user.Address|e }}" />
+                    <br />
+                    <label for="case_status">Case Status</label>
+                    <select name="case_status">
+                        {% for s in status %}
+                        {% if s.UID_Case_Status == user.Case_Status %}
+                        <option value="{{ s.UID_Case_Status }}" selected>{{ s.Case_Status_Name|e }}</option>
+                        {% else %}
+                        <option value="{{ s.UID_Case_Status }}">{{ s.Case_Status_Name|e }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <br />
+                    <label for="case_type">Case Type</label>
+                    <select name="case_type">
+                        {% for t in caseTypes %}
+                        {% if t.UID_Case_Type == user.Case_Type_UID %}
+                        <option value="{{ t.UID_Case_Type }}" selected>{{ t.Case_Type_Name|e }}</option>
+                        {% else %}
+                        <option value="{{ t.UID_Case_Type }}">{{ t.Case_Type_Name|e }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <br />
+                    <label for="case_num">Case Number</label>
+                    <input type="number" name="case_num" value="{{ clientData.Case_Number }}" />
+                    <br />
+                    <label for="office">County Office UID</label>
+                    <select name="office">
+                        {% for o in officeList %}
+                        {% if o.UID_County_Office == user.County_Office_UID %}
+                        <option value="{{ o.UID_County_Office }}" selected>{{ o.Office_Name|e }}</option>
+                        {% else %}
+                        <option value="{{ o.UID_County_Office }}">{{ o.Office_Name|e }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <br />
+                    <input type="number" name="uid" value="{{ user.UID_Client }}" hidden />
+                    <button name="submit" type="submit">Update Info</button>
+                </form>
+            </div>
+	     {% endfor %}
+
+        <br />
+        <a href="{{ url_for('userViews.notImplemented') }}">Add a New Connected Case</a>
     {% elif templateNum == 1 %}
 
         <table>
@@ -93,11 +140,11 @@
             <tr>
                 <td>{{ upload.Doc_Name|e }}</td>
                 <td>{{ upload.Date_Uploaded|e }}</td>
-                <td>{{ upload.Document_Type }}</td>
+                <td>{{ upload.Document_Type_Name|e }}</td>
                 <td>
                     <form action="/uploads/render" method="post" target="_blank">
                         <!-- TODO: hash the client UID and file name maybe -->
-                        <input name="fileName" type="text" value="{{ upload.File_Name }}" hidden />
+                        <input name="fileName" type="text" value="{{ upload.File_Name|e }}" hidden />
                         <input name="cid" type="number" value="{{ upload.Client_UID }}" hidden />
                         <input type="submit" name="renderImage" value="Open" />
                     </form>
@@ -111,7 +158,7 @@
             <!-- Only show the selected client's deadlines -->
             {% if event.User_UID == c %}
                 <button class="accordion">
-                    <span style="background-color: rgb({{ event.Color_R }},{{ event.Color_G }},{{ event.Color_B }}); height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
+                    <span style="background-color: {{ event.Color }}; height: 8px; width: 8px; border-radius: 50%; display: inline-block;"></span>
                     {{ event.Event_Name|e }}, {{ event.Event_Date_Month }} / {{ event.Event_Date_Day }} / {{ event.Event_Date_Year }}
                 </button>
                 <div class="clientInfo">
@@ -122,16 +169,11 @@
                         <label for="e_des">Event Description</label>
                         <input type="text" name="e_des" value="{{ event.Event_Description|e }}" />
                         <br />
-                        <label for="e_date">Month</label>
+                        <label for="e_date">Date</label>
                         <input type="date" name="e_date" value="{{ event.Date }}" />
                         <br />
-                        <h3>Dot Color</h3>
-                        <label for="ec_r">Red</label>
-                        <input type="number" name="ec_r" value="{{ event.Color_R }}" />
-                        <label for="ec_g">Green</label>
-                        <input type="number" name="ec_g" value="{{ event.Color_G }}" />
-                        <label for="ec_b">Blue</label>
-                        <input type="number" name="ec_b" value="{{ event.Color_B }}" />
+                        <label for="ec">Dot Color</label>
+                        <input type="color" name="ec" value="{{ event.Color }}" />
 
                         <input type="number" name="e_id" value="{{ event.UUID_Calendar }}" hidden />
                         <input type="number" name="uid" value="{{ c }}" hidden />
@@ -140,6 +182,24 @@
                 </div>
             {% endif %}
         {% endfor %}
+         <div class="clientInfo">
+                <form action="{{ url_for('userViews.add_deadline') }}" method="post">
+                    <label for="e_name">Event Name</label>
+                    <input type="text" name="e_name" value="" />
+                    <br />
+                    <label for="e_des">Event Description</label>
+                    <input type="text" name="e_des" value="" />
+                    <br />
+                    <label for="e_date">Date</label>
+                    <input type="date" name="e_date" value="" />
+                    <br />
+                    <label for="ec">Dot Color</label>
+                    <input type="color" name="ec" value="#ffffff" />
+
+                    <input type="number" name="uid" value="{{ c }}" hidden />
+                    <button name="submit" type="submit">Add Deadline</button>
+                </form>
+            </div>
     {% else %}
 <p>template number not implemented!</p>
     {% endif %}

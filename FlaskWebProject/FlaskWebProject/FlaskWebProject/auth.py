@@ -138,7 +138,7 @@ def submit_new_profile():
 		database.commit()
 		database.close()
 
-		return render_template('loginSuccessTest.html')
+		return redirect(url_for('userViews.profile'))
 
 	else:
 		## redirect back to here with previous data entered

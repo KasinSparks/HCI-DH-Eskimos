@@ -1,111 +1,384 @@
+html{
+    text-align: center;
+}
 body {
     font-family: 'Lato', sans-serif;
 }
-
-/* ---------- Layout Page ---------- */
-.content-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+a{
+    color: black;
+}
+a:hover{
+    color: blue;
 }
 
-.content {
-    display: inline-block;
-    width: 70%;
-    padding: 40px 10px 40px 10px;
-    border: 1px solid lightgrey
-}
-
-.title {
+input[type=file] { /*for testing purposes only*/
     text-align: center;
-    font-size: 60px;
-    font-weight: bold;
-}
-
-.navbar {
-    width: 100px;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-/* styles for validation helpers */
-.field-validation-error {
-    color: #b94a48;
-}
-
-.field-validation-valid {
-    display: none;
-}
-
-input.input-validation-error {
-    border: 1px solid #b94a48;
-}
-
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
-}
-
-.validation-summary-errors {
-    color: #b94a48;
-}
-
-.validation-summary-valid {
-    display: none;
-}
-
-/* ---------- Calendar CSS ---------- */
-
-.deadline-container tr:nth-child(odd) {
-    background-color: #efefef;
-}
-
-.deadline-container td {
-    height: 50px;
-}
-
-.calendar-header {
-    text-align: center;
-    font-size: 30px;
-}
-
-.hidden-container {
-    overflow: hidden;
-}
-
-.deadline-container {
-    float: left;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.calendar-container {
-    float: right;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.calendar {
-    display: inline-block;
     border: 1px solid black;
 }
 
-.deadlines {
-    display: inline-block;
+
+/*******************************************************************************************/
+/*************************************** QUYEN: MOBILES ************************************/
+/*******************************************************************************************/
+@media only screen and (max-width: 900px) {
+   
+    /**************************** Layout Page ***************************/
+    .dhslogo{display: none;}
+
+    .navbar{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        border: 1px solid black;
+    }
+    .navbar li{
+        display: inline-block;
+    }
+
+    /**************************** Login & Create Profile Pages ***************************/
+    .labelcol, .col-label {
+        width: 30%;
+        float: left;
+        text-align: left;
+        padding-left: 10%;
+    }
+    .inputcol, .col-input {
+        width: 49%;
+        float: left;
+        padding: 2% 0 2% 5px;
+        padding-right: 10%;
+        border: 1px solid black;
+    }
+    input[type=submit].toClick{
+        padding: 2%;
+    }
+
+
+
+    /**************************** Profile Page ***************************/
+    .accordion{
+        width: 100%;
+        padding: 1% 0 1% 0;
+    }
+    .clientInfo{
+        width: 100%;
+        height: 25%;
+        text-align: left;
+        border: 1px solid black;
+    }
+
+    /**************************** Upload Page ***************************/
+    .tablecol{
+        padding-top: 5%;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        overflow: auto;
+    }
+
+    td {
+        text-align: center;
+        padding: 1%;
+    }
+
+    .uploadcol{ 
+        padding-top: 10%;
+    }
+        .uploadcol a {
+            text-decoration: none;
+            padding: 5px 10px 5px 10px;
+            border: 1px solid black;
+        }
+
+    .row{padding-top: 2%;}
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
-.calendar-date {
-    border: 1px solid black;
-    font-size: 20px;
-    position: relative;
-    height: 29px;
-    text-align: center;
+
+
+
+/*******************************************************************************************/
+/*************************************** QUYEN: DESKTOP ************************************/
+/*******************************************************************************************/
+@media only screen and (min-width: 901px) {
+
+    /* ------------------  MICHAEL: Layout Page ---------------- */
+    .content-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .content {
+        display: inline-block;
+        width: 70%;
+        padding: 40px 10px 40px 10px;
+        border: 1px solid lightgrey
+    }
+
+    .title {
+        text-align: center;
+        font-size: 60px;
+        font-weight: bold;
+    }
+
+    .navbar {
+        width: 120px;
+    }
+
+    /* Set width on the form input elements since they're 100% wide by default */
+    input,
+    select,
+    textarea {
+        max-width: 280px;
+    }
+
+    /* styles for validation helpers */
+    .field-validation-error {
+        color: #b94a48;
+    }
+
+    .field-validation-valid {
+        display: none;
+    }
+
+    input.input-validation-error {
+        border: 1px solid #b94a48;
+    }
+
+    input[type="checkbox"].input-validation-error {
+        border: 0 none;
+    }
+
+    .validation-summary-errors {
+        color: #b94a48;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+
+
+
+
+    /************************** login.html ***************************/
+    /*client column & everything inside it*/
+    .clientcol {
+        width: 60%;
+        float: left;
+        border-right: 1px solid black;
+    }
+
+    .labelcol {
+        width: 30%;
+        float: left;
+        text-align: left;
+    }
+
+    .inputcol {
+        width: 70%;
+        float: left;
+    }
+
+    .labelcol label {
+        text-align: left;
+        display: inline-block;
+        padding: 12px 12px 12px 2px;
+    }
+
+    .inputcol input[type=text] {
+        display: inline-block;
+        padding: 10px;
+        width: 100%;
+        border: 1px solid black;
+    }
+
+    /*not client column & everything inside it*/
+    .notclientcol {
+        width: 39%;
+        float: left;
+    }
+
+    form .toClick {
+        width: 50%;
+        margin: auto;
+    }
+
+    .row {
+        padding-bottom: 5px;
+    }
+
+
+    /********************** createProfile.html *********************/
+    form {
+        margin: auto;
+    }
+
+    .col-label {
+        width: 30%;
+        float: left;
+        text-align: left;
+        padding: 10px 0 10px 5%;
+    }
+
+    label.col-label {
+        font-size: large;
+        max-width: 50%;
+    }
+
+    .col-input {
+        width: 60%;
+        float: left;
+        padding: 10px;
+    }
+
+    input.col-input, select.col-input {
+        max-width: 80%;
+        border: 1px solid black;
+    }
+
+    input[type=submit] {
+        width: 15%;
+        padding: 5px 0 5px 0;
+    }
+
+
+    /************************ profile.html ************************/
+    .row button {
+        display: block;
+        width: 100%;
+    }
+
+    .accordion {
+        padding: 5px 0 5px 0;
+    }
+
+    .clientInfo {
+        height: 25%;
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        text-align: left;
+    }
+
+    .col1 { /*client info*/
+        width: 59%;
+        float: left;
+    }
+
+    .col2 { /*dhs info*/
+        width: 38%;
+        float: left;
+        padding-left: 2%;
+    }
+
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .update {
+        text-align: center;
+    }
+
+    /* -------------------- MICHAEL: calendar.html ------------------ */
+
+    .deadline-container tr:nth-child(odd) {
+        background-color: #efefef;
+    }
+
+    .deadline-container td {
+        height: 50px;
+    }
+
+    /*Quyen: this is going to be used to style title for every pages*/
+    .page-header {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .hidden-container {
+        overflow: hidden;
+    }
+
+    .deadline-container {
+        float: left;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .calendar-container {
+        float: right;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .calendar {
+        display: inline-block;
+        border: 1px solid black;
+    }
+
+    .deadlines {
+        display: inline-block;
+    }
+
+    .calendar-date {
+        border: 1px solid black;
+        font-size: 20px;
+        position: relative;
+        height: 29px;
+        text-align: center;
+    }
+
+
+    /*************************** uploads.html *************************/
+    .tablecol { /*table of uploaded document*/
+        width: 65%;
+        float: left;
+        padding-left: 1%;
+    }
+
+    .uploadcol { /*upload new document*/
+        width: 34%;
+        float: left;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .uploadcol a {
+        text-decoration: none;
+        padding: 5px 10px 5px 10px;
+        border: 1px solid black;
+    }
+
+    /*************************** upload document *************************/
+    
+
 }
+

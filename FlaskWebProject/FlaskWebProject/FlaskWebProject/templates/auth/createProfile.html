@@ -1,60 +1,71 @@
 ﻿{% extends 'layout.html' %}
 
 {% block content %}
+<div class="page-header">
+    <h>Create Your DHS Account</h>
+    <hr />
+</div>
 
     <!-- ensure the / is infront of path to advoid error -->
-	<form action="/auth/create/submit" method="post">
-        <label for="username">Username:</label>
-        <input type="email" name="username" value="{{ un }}"/>
-        <br />
-        <label for="password">Password:</label>
-		<input type="password" name="password" value="{{ pw }}"/>
+<form action="/auth/create/submit" method="post">
+    <br />
+    <div class="row">
+        <label class="col-label" for="username">Username:</label>
+        <input class="col-input" type="email" name="username" value="{{ un }}" />
+    </div>
+    <div class="row">
+        <label class="col-label" for="password">Password:</label>
+        <input class="col-input" type="password" name="password" value="{{ pw }}" />
+    </div>
+    <br />
+    <br />
 
-        <br />
-        <br />
-        <label for"first_name">First Name:</label>
-        <input type="text" name="first_name" value="{{ fn }}"/>
+    <div class="row">
+        <label class="col-label" for"first_name">First Name:</label>
+        <input class="col-input" type="text" name="first_name" value="{{ fn }}" />
+    </div>
+    <div class="row">
+        <label class="col-label" for="last_name">Last Name:</label>
+        <input class="col-input" type="text" name="last_name" value="{{ ln }}" />
+    </div>
+    <div class="row">
+        <label class="col-label" for="dob">Date of Birth</label>
+        <input class="col-input" type="date" name="dob" value="{{ db }}" />
+    </div>
+    <div class="row">
+        <label class="col-label" for="address">Address:</label>
+        <input class="col-input" type="text" name="address" value="{{ a }}" />
+    </div>
+    <br />
+    <br />
 
-        <br />
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" value="{{ ln }}"/>
-
-        <br />
-        <label for="dob">Date of Birth</label>
-        <input type="date" name="dob" value="{{ db }}"/>
-
-        <br />
-        <label for="address">Address:</label>
-        <input type="text" name="address" value="{{ a }}"/>
-
-
-        <br />
-        <br />
-        <label for="county">County Office:</label>
-        <select name="county" onchange="window.location.search = '?county=' + options[selectedIndex].value;">
+    <div class="row">
+        <label class="col-label" for="county">County Office:</label>
+        <select class="col-input" name="county" onchange="window.location.search = '?county=' + options[selectedIndex].value;">
             {% for c in counties %}
-                {% if c.UID_County_Office == cv %}
-                    <option value="{{ c.UID_County_Office }}" selected>{{ c.Office_Name|e }}</option>
-                {% else %}
-                    <option value="{{ c.UID_County_Office }}">{{ c.Office_Name|e }} </option>
-                {% endif %}
+            {% if c.UID_County_Office == cv %}
+            <option value="{{ c.UID_County_Office }}" selected>{{ c.Office_Name|e }}</option>
+            {% else %}
+            <option value="{{ c.UID_County_Office }}">{{ c.Office_Name|e }} </option>
+            {% endif %}
             {% endfor %}
         </select>
-
-        <br />
-        <label for="social_worker">Social Worker:</label>
-        <select name="social_worker">
+    </div>
+    <div class="row">
+        <label class="col-label" for="social_worker">Social Worker:</label>
+        <select class="col-input" name="social_worker">
             {% for w in workers %}
-                {% if w.UID_Social_Worker == uid_sw %}
-                    <option value="{{ w.UID_Social_Worker }}" selected>{{ w.Last_Name|e }}, {{ w.First_Name|e }}</option>
-                {% else %}
-                    <option value="{{ w.UID_Social_Worker }}">{{ w.Last_Name|e }}, {{ w.First_Name|e }}</option>
-                {% endif %}
+            {% if w.UID_Social_Worker == uid_sw %}
+            <option value="{{ w.UID_Social_Worker }}" selected>{{ w.Last_Name|e }}, {{ w.First_Name|e }}</option>
+            {% else %}
+            <option value="{{ w.UID_Social_Worker }}">{{ w.Last_Name|e }}, {{ w.First_Name|e }}</option>
+            {% endif %}
             {% endfor %}
         </select>
+    </div>
+    <br />
+    <br />
 
-        <br />
-        <br />
-		<input type="submit" name="create" value="Create"/>
-	</form>
+    <input type="submit" name="create" value="Create" />
+</form>
 {% endblock content %}

@@ -1,67 +1,71 @@
 ﻿<!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ title }} - DHS Portal</title>
-        <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-        <script src="/static/scripts/modernizr-2.6.2.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - DHS Portal</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+</head>
 
-    <body>
+<body>
 
-        <!-- Logo -->
-        <div style="position: absolute; top: 13px; left: 70px;">
-            <img style="width: 60%;" src="/static/img/logo.png">
-        </div>
+    <!-- Logo -->
+    <div class="dhslogo" style="position: absolute; top: 13px; left: 70px;">
+        <img style="width: 60%;" src="/static/img/logo.png">
+    </div>
 
-        <!-- Title -->
-        <div class="title">
-            OKDHS Adult and Family Services Information Center
-            <hr />
-        </div>
+    <!-- Title -->
+    <div class="title">
+        OKDHS Adult and Family Services Information Center
+        <hr />
+    </div>
 
-        <!-- Main -->
-        <div class="content-container">
+    <!-- Main -->
+    <div class="content-container">
 
-            <!-- Navbar -->
-            <div class="navbar">
+        <!-- Navbar -->
+        <div class="navbar">
+            <ul>
+
                 <li><a href="{{ url_for('userViews.profile') }}">Profile</a></li>
                 {% if g.user['Social_Worker'] == 1 %}
-                    <br />
-                    <li><a href="{{ url_for('userViews.notifications') }}">Notifications</a></li>
-                    <br />
-                    <li><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></li>
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.notifications') }}">Notifications</a></li>
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></li>
                 {% else %}
-                    <br />
-                    <li><a href="{{ url_for('userViews.uploads') }}">Uploads</a></li>
-                    <br />
-                    <li><a href="{{ url_for('userViews.calendar') }}">Calendar</a></li>
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.uploads') }}">Uploads</a></li>
+                <!--br /-->
+                <li><a href="{{ url_for('userViews.calendar') }}">Calendar</a></li>
                 {% endif %}
-                    <br />
-                    <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
-            </div>
+                <!--br /-->
+                <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
 
-            <!-- Content -->
-            <div class="content">
-                    {% block content %}{% endblock %}
-            </div>
+            </ul>
         </div>
 
-        <!-- Footer -->
-        <div>
-            <footer style="margin-top: 10px; text-align: center">
-                <p><i>&copy; {{ year }} - DHS Portal</i></p>
-            </footer>
+        <!-- Content -->
+        <div class="content">
+            {% block content %}{% endblock %}
         </div>
+    </div>
 
-        <!-- Scripts -->
-        <script src="/static/scripts/jquery-1.10.2.js"></script>
-        <script src="/static/scripts/respond.js"></script>
-        {% block scripts %}{% endblock %}
+    <!-- Footer -->
+    <div>
+        <footer style="margin-top: 10px; text-align: center">
+            <p><i>&copy; {{ year }} - DHS Portal</i></p>
+        </footer>
+    </div>
 
-    </body>
+    <!-- Scripts -->
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    {% block scripts %}{% endblock %}
+
+</body>
 
 </html>

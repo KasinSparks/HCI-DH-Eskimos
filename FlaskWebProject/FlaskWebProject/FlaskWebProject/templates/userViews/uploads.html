@@ -1,6 +1,12 @@
 ﻿{% extends "layout.html" %}
 
 {% block content %}
+<div class="page-header">
+    <h>Image Uploading Center</h>
+    <hr />
+</div>
+
+    <div class="tablecol">
 	<table>
 		<!--Table Headers-->
 		<tr>
@@ -16,11 +22,11 @@
 			<tr>
 				<td>{{ upload.Doc_Name|e }}</td>
 				<td>{{ upload.Date_Uploaded|e }}</td>
-				<td>{{ upload.Document_Type }}</td>
+				<td>{{ upload.Document_Type_Name|e }}</td>
 				<td>
                     <form action="/uploads/render" method="post" target="_blank">
                         <!-- TODO: hash the client UID and file name maybe -->
-                        <input name="fileName" type="text" value="{{ upload.File_Name }}" hidden />
+                        <input name="fileName" type="text" value="{{ upload.File_Name|e}}" hidden />
                         <input name="cid" type="number" value="{{ upload.Client_UID }}" hidden />
                         <input type="submit" name="renderImage" value="Open" />
                     </form>
@@ -28,6 +34,9 @@
 			</tr>
 		{% endfor %}
 	</table>
+    </div>
 
-	<a href="/uploads/upload_document">Upload a new document</a>
+    <div class="uploadcol">
+	    <a href="/uploads/upload_document">Upload a new document</a>
+    </div>
 {% endblock content %}
