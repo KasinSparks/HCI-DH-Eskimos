@@ -16,7 +16,6 @@ input[type=file] { /*for testing purposes only*/
     border: 1px solid black;
 }
 
-
 /*******************************************************************************************/
 /*************************************** QUYEN: MOBILES ************************************/
 /*******************************************************************************************/
@@ -24,6 +23,10 @@ input[type=file] { /*for testing purposes only*/
    
     /**************************** Layout Page ***************************/
     .dhslogo{display: none;}
+
+    .footer-img{display: none;}
+
+    .white-banner{display: none;}
 
     .navbar{
         position: fixed;
@@ -111,6 +114,36 @@ input[type=file] { /*for testing purposes only*/
 /*******************************************************************************************/
 @media only screen and (min-width: 901px) {
 
+    .title hr {
+        height: 2px;
+        color: lightgrey;
+        background-color: lightgrey;
+        border: none;
+    }
+
+    body {
+        background-color: #f7f7f7;
+    }
+
+    .navbar-button {
+        border: 1px solid lightgrey;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-bottom: 1px;
+        margin-right: 1px;
+        background-color: white;
+    }
+    
+    .navbar-button:hover {
+        background-color: #EEFFEE;
+        color: black;
+    }
+    
+    .navbar a {
+        text-decoration: none;
+        color: grey;
+    }
+
     /* ------------------  MICHAEL: Layout Page ---------------- */
     .content-container {
         display: flex;
@@ -129,6 +162,7 @@ input[type=file] { /*for testing purposes only*/
         text-align: center;
         font-size: 60px;
         font-weight: bold;
+        color: #2d2d2d;
     }
 
     .navbar {
@@ -173,15 +207,17 @@ input[type=file] { /*for testing purposes only*/
     /************************** login.html ***************************/
     /*client column & everything inside it*/
     .clientcol {
-        width: 60%;
+        width: 35%;
         float: left;
         border-right: 1px solid black;
+        padding-left: 200px;
     }
 
     .labelcol {
         width: 30%;
         float: left;
-        text-align: left;
+        text-align: right;
+        padding-right: 30px;
     }
 
     .inputcol {
@@ -204,17 +240,22 @@ input[type=file] { /*for testing purposes only*/
 
     /*not client column & everything inside it*/
     .notclientcol {
-        width: 39%;
+        width: 49%;
         float: left;
     }
 
     form .toClick {
-        width: 50%;
+        width: 75%;
         margin: auto;
     }
 
     .row {
         padding-bottom: 5px;
+    }
+
+    .login-button {
+        text-align: left;
+        padding-left: 20px;
     }
 
 
