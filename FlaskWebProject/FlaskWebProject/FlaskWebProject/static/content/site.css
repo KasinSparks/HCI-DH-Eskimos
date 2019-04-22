@@ -39,6 +39,13 @@ input[type=file] { /*for testing purposes only*/
     }
 
     /**************************** Login & Create Profile Pages ***************************/
+
+    .login-failed {
+        margin-left: 150px;
+        margin-top: 6px;
+        color: red;
+    }
+
     .labelcol, .col-label {
         width: 30%;
         float: left;
@@ -205,6 +212,22 @@ input[type=file] { /*for testing purposes only*/
 
 
     /************************** login.html ***************************/
+
+    .login-failed {
+        margin-left: 155px;
+        margin-bottom: 8px;
+        color: red;
+    }
+
+    .login-button {
+        margin-left: 150px;
+    }
+
+    .create-button {
+        margin-left: 150px;
+        padding: 5px;
+    }
+
     /*client column & everything inside it*/
     .clientcol {
         width: 35%;
@@ -240,8 +263,10 @@ input[type=file] { /*for testing purposes only*/
 
     /*not client column & everything inside it*/
     .notclientcol {
-        width: 49%;
+        width: 39%;
         float: left;
+        text-align: left;
+        margin-left: 20px;
     }
 
     form .toClick {
@@ -251,11 +276,6 @@ input[type=file] { /*for testing purposes only*/
 
     .row {
         padding-bottom: 5px;
-    }
-
-    .login-button {
-        text-align: left;
-        padding-left: 20px;
     }
 
 

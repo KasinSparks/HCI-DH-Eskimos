@@ -19,14 +19,18 @@
             <input class="inputcol" type="password" name="password" />
         </div>
 
-        <div class="row toClick"><input style="margin-left: 150px;" type="submit" name="login" value="Login" /></div>
-        <div class="row toClick"><button style="padding: 4px; width: 200px; margin-left: 150px;" onclick="location.href='/auth/create'" type="button">Create an Account</button></form></div>
+        {% if title == 'Login Failed' %}
+        <div class="login-failed">Incorrect Username or Password</div>
+        {% endif %}
+
+        <div class="row toClick"><input class="login-button"  type="submit" name="login" value="Login" /></div>
+        <div class="row toClick"><input class="create-button" onclick="location.href='/auth/create'" type="button" value="Create an Account" /></form></div>
     </form>
 </div>
 
 <div class="notclientcol">
-    <div class="login-button row toClick"><a href="">Not a DHS Client?</a></div>
-    <div class="login-button row toClick"><a href="http://www.okdhs.org" target="_blank">Learn More</a></div>
+    <div class="row toClick"><a href="">Not a DHS Client?</a></div>
+    <div class="row toClick"><a href="http://www.okdhs.org" target="_blank">Learn More</a></div>
 </div>
 
     

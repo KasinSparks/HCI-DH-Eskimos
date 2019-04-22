@@ -61,7 +61,7 @@ def login():
 		flash(errorVar)
 
 	return render_template('auth/login.html',
-		title='Home Page',
+		title='Login Failed',
 		year=datetime.now().year
 		)
 

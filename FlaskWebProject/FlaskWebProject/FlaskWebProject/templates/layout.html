@@ -12,7 +12,7 @@
 
 <body>
 
-    {% if title != 'Login Page' and title != 'Home Page' and title != 'Create Profile' %}
+    {% if title != 'Login Page' and title != 'Home Page' and title != 'Create Profile' and title != 'Login Failed' %}
     <a style="text-decoration: none;" href="/profile">
     {% else %}
     <a style="text-decoration: none;" href="/">
@@ -41,7 +41,7 @@
     <!-- Main -->
     <div class="content-container">
 
-        {% if title != 'Login Page' and title != 'Create Profile' %}
+        {% if title != 'Login Page' and title != 'Create Profile' and title != 'Login Failed' %}
         <!-- Navbar -->
         <div class="navbar">
 
