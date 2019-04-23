@@ -1,8 +1,23 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
 html{
     text-align: center;
 }
 body {
     font-family: 'Lato', sans-serif;
+
 }
 a{
     color: black;
@@ -16,7 +31,6 @@ input[type=file] { /*for testing purposes only*/
     border: 1px solid black;
 }
 
-
 /*******************************************************************************************/
 /*************************************** QUYEN: MOBILES ************************************/
 /*******************************************************************************************/
@@ -25,17 +39,86 @@ input[type=file] { /*for testing purposes only*/
     /**************************** Layout Page ***************************/
     .dhslogo{display: none;}
 
+    .footer-img{display: none;}
+
     .navbar{
         position: fixed;
         bottom: 0;
-        width: 100%;
-        border: 1px solid black;
+        left: 0;
+        width: 99.625%;
+        height: 14%;
+        background-color: #f7f7f7;;
+        text-align: left;
+        padding-left: 2%;
+        padding-top: 1%;
+        border-top: 1px solid grey;
     }
-    .navbar li{
-        display: inline-block;
+
+    .navbar-button {
+        position: relative;
+        border: 1px solid lightgrey;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 23%;
+        margin-right: 1%;
+        height: 95%;
     }
 
     /**************************** Login & Create Profile Pages ***************************/
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover, .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .not-client-button:hover {
+        cursor: pointer;
+        color: blue;
+    }
+
+    .account-created {
+        margin-top: 6px;
+        color: green;
+    }
+
+    .login-failed {
+        margin-top: 6px;
+        color: red;
+    }
+
     .labelcol, .col-label {
         width: 30%;
         float: left;
@@ -101,6 +184,36 @@ input[type=file] { /*for testing purposes only*/
         display: table;
         clear: both;
     }
+
+    /****************************** CALENDAR ******************************/
+
+    .calendar-node-today {
+        width: 75;
+        height: 50;
+        background-color: turquoise;
+        text-align: left;
+        vertical-align: top;
+        border: 3px solid black;
+        padding: 5px;
+    }
+
+    .calendar-node-not-today {
+        width: 75;
+        height: 50;
+        text-align: left;
+        vertical-align: top;
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .calendar-node {
+        width: 75;
+        height: 50;
+        text-align: left;
+        vertical-align: top;
+        border: 1px solid black;
+        padding: 5px;
+    }
 }
 
 
@@ -110,6 +223,37 @@ input[type=file] { /*for testing purposes only*/
 /*************************************** QUYEN: DESKTOP ************************************/
 /*******************************************************************************************/
 @media only screen and (min-width: 901px) {
+
+    body {
+        background-color: #f7f7f7;
+    }
+
+    .title hr {
+        height: 2px;
+        color: lightgrey;
+        background-color: lightgrey;
+        border: none;
+    }
+
+    .navbar-button {
+        border: 1px solid lightgrey;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-bottom: 1px;
+        margin-right: 1px;
+        background-color: white;
+        display: block;
+    }
+    
+    .navbar-button:hover {
+        background-color: #EEFFEE;
+        color: black;
+    }
+    
+    .navbar a {
+        text-decoration: none;
+        color: grey;
+    }
 
     /* ------------------  MICHAEL: Layout Page ---------------- */
     .content-container {
@@ -122,13 +266,14 @@ input[type=file] { /*for testing purposes only*/
         display: inline-block;
         width: 70%;
         padding: 40px 10px 40px 10px;
-        border: 1px solid lightgrey
+        border: 1px solid lightgrey;
     }
 
     .title {
         text-align: center;
         font-size: 60px;
         font-weight: bold;
+        color: #2d2d2d;
     }
 
     .navbar {
@@ -171,17 +316,83 @@ input[type=file] { /*for testing purposes only*/
 
 
     /************************** login.html ***************************/
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 20%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover, .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .not-client-button:hover {
+        cursor: pointer;
+        color: blue;
+    }
+
+    .account-created {
+        margin-left: 155px;
+        margin-bottom: 8px;
+        color: green;
+    }
+
+    .login-failed {
+        margin-left: 155px;
+        margin-bottom: 8px;
+        color: red;
+    }
+
+    .login-button {
+        margin-left: 150px;
+    }
+
+    .create-button {
+        margin-left: 150px;
+        padding: 5px;
+    }
+
     /*client column & everything inside it*/
     .clientcol {
-        width: 60%;
+        width: 35%;
         float: left;
         border-right: 1px solid black;
+        padding-left: 200px;
     }
 
     .labelcol {
         width: 30%;
         float: left;
-        text-align: left;
+        text-align: right;
+        padding-right: 30px;
     }
 
     .inputcol {
@@ -206,10 +417,12 @@ input[type=file] { /*for testing purposes only*/
     .notclientcol {
         width: 39%;
         float: left;
+        text-align: left;
+        margin-left: 20px;
     }
 
     form .toClick {
-        width: 50%;
+        width: 75%;
         margin: auto;
     }
 
@@ -292,6 +505,34 @@ input[type=file] { /*for testing purposes only*/
     }
 
     /* -------------------- MICHAEL: calendar.html ------------------ */
+
+    .calendar-node-today {
+        width: 75;
+        height: 75;
+        background-color: turquoise;
+        text-align: left;
+        vertical-align: top;
+        border: 3px solid black;
+        padding: 5px;
+    }
+
+    .calendar-node-not-today {
+        width: 75;
+        height: 75;
+        text-align: left;
+        vertical-align: top;
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .calendar-node {
+        width: 75;
+        height: 75;
+        text-align: left;
+        vertical-align: top;
+        border: 1px solid black;
+        padding: 5px;
+    }
 
     .deadline-container tr:nth-child(odd) {
         background-color: #efefef;
@@ -377,8 +618,11 @@ input[type=file] { /*for testing purposes only*/
         border: 1px solid black;
     }
 
+    input.open {
+        width: 4em;  height: 2em;
+    }
+
     /*************************** upload document *************************/
     
 
 }
-

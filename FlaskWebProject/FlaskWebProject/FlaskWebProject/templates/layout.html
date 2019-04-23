@@ -10,53 +10,68 @@
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
 </head>
 
-<body>
+<body scroll="no" overflow="hidden">
 
-    <!-- Logo -->
-    <div class="dhslogo" style="position: absolute; top: 13px; left: 70px;">
-        <img style="width: 60%;" src="/static/img/logo.png">
-    </div>
+    {% if title != 'Login Page' and title != 'Home Page' and title != 'Create Profile' and title != 'Login Failed' and title != 'Account Created' %}
+    <a style="text-decoration: none;" href="/profile">
+    {% else %}
+    <a style="text-decoration: none;" href="/">
+    {% endif %}
+    <div class="header" >
 
-    <!-- Title -->
-    <div class="title">
-        OKDHS Adult and Family Services Information Center
-        <hr />
+        <!-- Logo -->
+        <div class="dhslogo" style="position: absolute; top: 13px; left: 70px;">
+            <img style="width: 60%;" src="/static/img/logo.png">
+        </div>
+
+        <!-- White Banner -->
+        <div class="white-banner" style="position: absolute; top: 0px; left: 0px; z-index: -1;">
+            <img src="/static/img/white_banner.png">
+        </div>
+
+        <!-- Title -->
+        <div class="title">
+            OKDHS Adult and Family Services Information Center
+            <hr />
+        </div>
+
     </div>
+    </a>
 
     <!-- Main -->
     <div class="content-container">
 
+        {% if title != 'Login Page' and title != 'Create Profile' and title != 'Login Failed' and title !='Account Created' %}
         <!-- Navbar -->
         <div class="navbar">
-            <ul>
 
-                <li><a href="{{ url_for('userViews.profile') }}">Profile</a></li>
-                {% if g.user['Social_Worker'] == 1 %}
-                <!--br /-->
-                <li><a href="{{ url_for('userViews.notifications') }}">Notifications</a></li>
-                <!--br /-->
-                <li><a href="{{ url_for('userViews.my_clients') }}">My Clients</a></li>
-                {% else %}
-                <!--br /-->
-                <li><a href="{{ url_for('userViews.uploads') }}">Uploads</a></li>
-                <!--br /-->
-                <li><a href="{{ url_for('userViews.calendar') }}">Calendar</a></li>
-                {% endif %}
-                <!--br /-->
-                <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+            <!-- Desktop -->
+            <a style="text-decoration: none" href="{{ url_for('userViews.profile') }}"><span class="navbar-button">Profile</span></a><!--
+            {% if g.user['Social_Worker'] == 1 %}
+            --><a style="text-decoration: none" href="{{ url_for('userViews.notifications') }}"><span class="navbar-button">Notifications</span></a><!--
+            --><a style="text-decoration: none" href="{{ url_for('userViews.my_clients') }}"><span class="navbar-button">My Clients</span></a><!--
+            {% else %}
+            --><a style="text-decoration: none" href="{{ url_for('userViews.uploads') }}"><span class="navbar-button">Uploads</span></a><!--
+            --><a style="text-decoration: none" href="{{ url_for('userViews.calendar') }}"><span class="navbar-button">Calendar</span></a><!--
+            {% endif %}
+            --><a style="text-decoration: none" href="{{ url_for('auth.logout') }}"><span class="navbar-button">Sign Out</span></a>
 
-            </ul>
         </div>
+        {% endif %}
 
         <!-- Content -->
-        <div class="content">
+        <div class="content" style="background-color: white;">
             {% block content %}{% endblock %}
         </div>
     </div>
 
     <!-- Footer -->
     <div>
-        <footer style="margin-top: 10px; text-align: center">
+        <div class="footer-img" style="position: fixed; bottom: 0; left: 0px; z-index: -2;">
+                <img src="/static/img/bg_footer.png">
+        </div>
+
+        <footer style="position: fixed; bottom: 0px; width: 99%; color: white; z-index: -1">
             <p><i>&copy; {{ year }} - DHS Portal</i></p>
         </footer>
     </div>

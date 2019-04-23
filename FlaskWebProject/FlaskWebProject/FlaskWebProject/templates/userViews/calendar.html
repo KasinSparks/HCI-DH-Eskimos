@@ -36,9 +36,9 @@
 							{% for data in row %}
 								{% if data != 0 %}
 									{% if data == currDate.day and year == currDate.year and month == currDate.month %}
-										<td style="background-color: turquoise; width:75; height:75; text-align:left; vertical-align:top; border: 3px solid black; padding: 5px;">
+										<td class="calendar-node-today">
 									{% else %}
-										<td style="width:75; height:75; text-align:left; vertical-align:top; border: 1px solid black; padding: 5px;">
+										<td class="calendar-node-not-today">
 									{% endif %}
 
 											{{ data }}
@@ -51,7 +51,7 @@
 											</div>
 										</td>
 								{% else %}
-									<td style="width:75; height:75; text-align:left; vertical-align:top; border: 1px solid black; padding: 5px;">
+									<td class="calendar-node">
 										
 									</td>
 								{% endif %}
