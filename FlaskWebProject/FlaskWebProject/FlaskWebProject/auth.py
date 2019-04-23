@@ -138,7 +138,10 @@ def submit_new_profile():
 		database.commit()
 		database.close()
 
-		return redirect(url_for('userViews.profile'))
+		return render_template('auth/login.html',
+			title='Account Created',
+			year=datetime.now().year
+		)
 
 	else:
 		## redirect back to here with previous data entered

@@ -23,15 +23,61 @@
         <div class="login-failed">Incorrect Username or Password</div>
         {% endif %}
 
+        {% if title == 'Account Created' %}
+        <div class="account-created">Account Succesfully Created</div>
+        {% endif %}
+
         <div class="row toClick"><input class="login-button"  type="submit" name="login" value="Login" /></div>
         <div class="row toClick"><input class="create-button" onclick="location.href='/auth/create'" type="button" value="Create an Account" /></form></div>
     </form>
 </div>
 
 <div class="notclientcol">
-    <div class="row toClick"><a href="">Not a DHS Client?</a></div>
+    <div id="myBtn" class="not-client-button row toClick" style="text-decoration: underline;">Not a DHS Client?</div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div style="text-align: center;"><b>What is a client?</b></div>
+            <p>
+               A client is an individual or family recieving benefits from the Department of Human Services (DHS).
+               If you aren't currently receiving benefits from a DHS program you can still use this application
+               to learn about the Adult and Family Services (AFS) department and programs.
+            </p>
+        </div>
+
+    </div>
     <div class="row toClick"><a href="http://www.okdhs.org" target="_blank">Learn More</a></div>
 </div>
 
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+</script>
     
 {% endblock content %}
