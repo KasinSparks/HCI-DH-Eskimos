@@ -618,8 +618,11 @@ input[type=file] { /*for testing purposes only*/
         border: 1px solid black;
     }
 
+    input.open {
+        width: 4em;  height: 2em;
+    }
+
     /*************************** upload document *************************/
     
 
 }
-
