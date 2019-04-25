@@ -35,6 +35,10 @@ input[type=file] { /*for testing purposes only*/
 /*************************************** QUYEN: MOBILES ************************************/
 /*******************************************************************************************/
 @media only screen and (max-width: 900px) {
+
+    .empty-space {
+        height: 100px;
+    }
    
     /**************************** Layout Page ***************************/
     .dhslogo{display: none;}
@@ -473,12 +477,12 @@ input[type=file] { /*for testing purposes only*/
 
     .accordion {
         padding: 5px 0 5px 0;
+        width: 100%;
     }
 
     .clientInfo {
         height: 25%;
-        border-left: 1px solid black;
-        border-top: 1px solid black;
+        border: 1px solid #3b3b3b3b;
         text-align: left;
     }
 
