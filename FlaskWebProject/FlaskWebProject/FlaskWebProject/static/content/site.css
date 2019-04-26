@@ -26,10 +26,45 @@ a:hover{
     color: blue;
 }
 
-input[type=file] { /*for testing purposes only*/
-    text-align: center;
-    border: 1px solid black;
+
+
+/******** SOCIAL WORKER SIDE ********/
+.submenu {
+    padding-bottom: 5%;
 }
+.submenu table, .submenu td, .submenu tr{
+    padding: 5px 0 5px 0;
+}
+.submenu button{
+    background-color: white;
+    font-size: 14px;
+    border: none;
+    padding-top: 5px;
+    text-decoration: underline;
+}
+    .submenu button:hover {
+        color: blue;
+    }
+
+.info-label{
+    padding-left: 5%;
+    width: 30%;
+    float: left;
+}
+.info-input{
+    width: 65%;
+    float: left;
+}
+    .info-input select, .info-input input{
+        width: 70%;
+    }
+
+.swbutton{
+    width: 20%;
+    margin: auto;
+}
+
+
 
 /*******************************************************************************************/
 /*************************************** QUYEN: MOBILES ************************************/
@@ -51,7 +86,7 @@ input[type=file] { /*for testing purposes only*/
         left: 0;
         width: 99.625%;
         height: 14%;
-        background-color: #f7f7f7;;
+        background-color: #f7f7f7;
         text-align: left;
         padding-left: 2%;
         padding-top: 1%;
@@ -136,9 +171,7 @@ input[type=file] { /*for testing purposes only*/
         padding-right: 10%;
         border: 1px solid black;
     }
-    input[type=submit].toClick{
-        padding: 2%;
-    }
+    
 
 
 
@@ -149,7 +182,7 @@ input[type=file] { /*for testing purposes only*/
     }
     .clientInfo{
         width: 100%;
-        height: 25%;
+        height: auto;
         text-align: left;
         border: 1px solid black;
     }
@@ -189,11 +222,18 @@ input[type=file] { /*for testing purposes only*/
         clear: both;
     }
 
+    /*for uploadDocument.html*/
+    .chooseFile {
+        text-align: center;
+        background-color: #f4f8ff;
+        padding: 3%;
+    }
+
     /****************************** CALENDAR ******************************/
 
     .calendar-node-today {
-        width: 75;
-        height: 50;
+        width: 75px;
+        height: 50px;
         background-color: turquoise;
         text-align: left;
         vertical-align: top;
@@ -202,8 +242,8 @@ input[type=file] { /*for testing purposes only*/
     }
 
     .calendar-node-not-today {
-        width: 75;
-        height: 50;
+        width: 75px;
+        height: 50px;
         text-align: left;
         vertical-align: top;
         border: 1px solid black;
@@ -211,8 +251,8 @@ input[type=file] { /*for testing purposes only*/
     }
 
     .calendar-node {
-        width: 75;
-        height: 50;
+        width: 75px;
+        height: 50px;
         text-align: left;
         vertical-align: top;
         border: 1px solid black;
@@ -389,14 +429,14 @@ input[type=file] { /*for testing purposes only*/
         width: 35%;
         float: left;
         border-right: 1px solid black;
-        padding-left: 200px;
+        padding-left: 20%;
     }
 
     .labelcol {
         width: 30%;
         float: left;
         text-align: right;
-        padding-right: 30px;
+        padding-right: 20px;
     }
 
     .inputcol {
@@ -425,13 +465,16 @@ input[type=file] { /*for testing purposes only*/
         margin-left: 20px;
     }
 
-    form .toClick {
+    /*form .toClick {
         width: 75%;
         margin: auto;
+    }*/
+    .toClick input[type=button] {
+        padding: 2px 5px;
     }
 
     .row {
-        padding-bottom: 5px;
+        padding-bottom: 7px;
     }
 
 
@@ -463,10 +506,12 @@ input[type=file] { /*for testing purposes only*/
         border: 1px solid black;
     }
 
-    input[type=submit] {
-        width: 15%;
-        padding: 5px 0 5px 0;
+    input[type=submit]{
+        width: 40%;
+        padding: 2px 0 2px 0;
+        margin: auto;
     }
+    
 
 
     /************************ profile.html ************************/
@@ -511,8 +556,8 @@ input[type=file] { /*for testing purposes only*/
     /* -------------------- MICHAEL: calendar.html ------------------ */
 
     .calendar-node-today {
-        width: 75;
-        height: 75;
+        width: 75px;
+        height: 75px;
         background-color: turquoise;
         text-align: left;
         vertical-align: top;
@@ -521,8 +566,8 @@ input[type=file] { /*for testing purposes only*/
     }
 
     .calendar-node-not-today {
-        width: 75;
-        height: 75;
+        width: 75px;
+        height: 75px;
         text-align: left;
         vertical-align: top;
         border: 1px solid black;
@@ -530,8 +575,8 @@ input[type=file] { /*for testing purposes only*/
     }
 
     .calendar-node {
-        width: 75;
-        height: 75;
+        width: 75px;
+        height: 75px;
         text-align: left;
         vertical-align: top;
         border: 1px solid black;
@@ -627,6 +672,10 @@ input[type=file] { /*for testing purposes only*/
     }
 
     /*************************** upload document *************************/
-    
+    .chooseFile {
+        text-align: center;
+        background-color: #f4f8ff;
+        padding: 3%;
+    }
 
 }

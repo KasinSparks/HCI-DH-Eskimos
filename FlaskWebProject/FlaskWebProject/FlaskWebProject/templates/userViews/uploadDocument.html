@@ -4,7 +4,7 @@
 	<img src="{{ defaultImg }}" , id="imagePrev" />
 
     <form enctype=multipart/form-data action="/uploads/submit_document" method="POST">
-        <div class="row">
+        <div class="row chooseFile">
             <input type="file" accept="image/*" name="image" id="image" onchange="document.getElementById('imagePrev').src = window.URL.createObjectURL(this.files[0])">
         </div>
         <br />
@@ -14,6 +14,7 @@
             <label class="col-label" for="docName">Name of Document</label>
             <input class="col-input" name="docName" type="text" />
         </div>
+        <br />
 
         <div class="row">
             <label class="col-label" for="docType">Document Type</label>
@@ -23,6 +24,7 @@
                 {% endfor %}
             </select>
         </div>
+        <br />
 
         <div class="row"><input type="submit"></div>
         <!--<input type="submit" value="Submit">-->
